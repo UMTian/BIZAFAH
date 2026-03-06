@@ -412,10 +412,10 @@ const caseStudyData = {
         strategy: "Headless commerce architecture with React frontend, AI-powered personalization, and mobile-first luxury experience design.",
         execution: "6-month phased rollout including platform migration, custom AR try-on features, and VIP customer portal.",
         results: [
-            { label: "Revenue Growth", value: "+180%" },
+            { label: "Revenue Growth", value: "180%" },
             { label: "Conversion Rate", value: "4.5%" },
             { label: "Page Load Time", value: "0.8s" },
-            { label: "Mobile Revenue", value: "+240%" }
+            { label: "Mobile Revenue", value: "240%" }
         ]
     },
     fintech: {
@@ -427,9 +427,9 @@ const caseStudyData = {
         strategy: "Simplified information architecture, biometric authentication, and predictive transaction features powered by ML.",
         execution: "3-month design sprint followed by gradual feature rollout with extensive A/B testing.",
         results: [
-            { label: "User Acquisition", value: "2M+" },
-            { label: "Onboarding Completion", value: "+85%" },
-            { label: "Daily Active Users", value: "+150%" },
+            { label: "User Acquisition", value: "2M" },
+            { label: "Onboarding Completion", value: "85%" },
+            { label: "Daily Active Users", value: "150%" },
             { label: "App Store Rating", value: "4.9★" }
         ]
     },
@@ -445,17 +445,17 @@ const caseStudyData = {
             { label: "Cost Reduction", value: "-40%" },
             { label: "Patient Satisfaction", value: "4.8/5" },
             { label: "No-Show Rate", value: "5%" },
-            { label: "Provider Efficiency", value: "+60%" }
+            { label: "Provider Efficiency", value: "60%" }
         ]
     }
 };
 
 // Portfolio Data (YOUR ORIGINAL DATA - UNCHANGED)
 const portfolioItems = [
-    { id: 'ecommerce', title: "Luxury Retail Platform", category: "ecommerce", result: "+180% Revenue" },
-    { id: 'fintech', title: "Neobank Redesign", category: "fintech", result: "2M+ Users" },
+    { id: 'ecommerce', title: "Luxury Retail Platform", category: "ecommerce", result: "180% Revenue" },
+    { id: 'fintech', title: "Neobank Redesign", category: "fintech", result: "2M Users" },
     { id: 'healthcare', title: "Telemedicine Platform", category: "healthcare", result: "-40% Costs" },
-    { id: 'saas', title: "B2B Analytics Dashboard", category: "saas", result: "+300% Engagement" },
+    { id: 'saas', title: "B2B Analytics Dashboard", category: "saas", result: "300% Engagement" },
     { id: 'ecommerce2', title: "Fashion Marketplace", category: "ecommerce", result: "$50M GMV" },
     { id: 'fintech2', title: "Crypto Trading App", category: "fintech", result: "$2B Volume" }
 ];
@@ -1072,8 +1072,8 @@ function initServicesStream() {
     });
 }
 
-// PORTFOLIO: Constellation Network (YOUR ORIGINAL CODE - ONLY ANIMATE FUNCTION MODIFIED)
-function initPortfolioConstellation() {
+// PORTFOLIO: Crystalline Shards
+function initPortfolioCrystals() {
     const container = document.getElementById('portfolio-canvas-container');
     if (!container) return;
 
@@ -1084,86 +1084,88 @@ function initPortfolioConstellation() {
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    const stars = [];
-    const starCount = 60;
-    const connections = [];
+    const crystals = [];
+    const count = 25;
 
-    // Create stars
-    for (let i = 0; i < starCount; i++) {
-        const geometry = new THREE.SphereGeometry(0.1, 8, 8);
+    // Use a sharp, long geometry for crystals
+    const geometry = new THREE.CylinderGeometry(0, 0.4, 2.5, 4);
+
+    for (let i = 0; i < count; i++) {
+        const color = Math.random() > 0.6 ? 0x9b59b6 : 0x00b894;
         const material = new THREE.MeshBasicMaterial({
-            color: Math.random() > 0.7 ? 0x9b59b6 : 0x00b894,
+            color: color,
+            wireframe: true,
             transparent: true,
-            opacity: 0.8
+            opacity: 0.25
         });
 
-        const star = new THREE.Mesh(geometry, material);
-        star.position.set(
+        const crystal = new THREE.Mesh(geometry, material);
+
+        // Add a soft core
+        const coreGeo = new THREE.CylinderGeometry(0, 0.2, 1.5, 4);
+        const coreMat = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.1
+        });
+        const core = new THREE.Mesh(coreGeo, coreMat);
+        crystal.add(core);
+
+        // Random position in a 3D volume
+        crystal.position.set(
+            (Math.random() - 0.5) * 35,
             (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 15,
-            (Math.random() - 0.5) * 5
+            (Math.random() - 0.5) * 15
         );
 
-        star.userData = {
-            pulseSpeed: 0.5 + Math.random(),
-            baseOpacity: 0.4 + Math.random() * 0.4,
-            twinkleOffset: Math.random() * Math.PI * 2
+        // Random initial orientation
+        crystal.rotation.set(
+            Math.random() * Math.PI,
+            Math.random() * Math.PI,
+            Math.random() * Math.PI
+        );
+
+        crystal.userData = {
+            rotSpeed: new THREE.Vector3(
+                (Math.random() - 0.5) * 0.012,
+                (Math.random() - 0.5) * 0.012,
+                (Math.random() - 0.5) * 0.008
+            ),
+            floatSpeed: 0.004 + Math.random() * 0.006,
+            floatOffset: Math.random() * Math.PI * 2
         };
 
-        scene.add(star);
-        stars.push(star);
+        scene.add(crystal);
+        crystals.push(crystal);
     }
 
-    camera.position.z = 12;
+    camera.position.z = 18;
 
     let time = 0;
-
-    // MODIFIED ANIMATE FUNCTION - Only runs when visible
     function animate() {
         requestAnimationFrame(animate);
 
-        // ONLY RENDER IF THIS SECTION IS VISIBLE
         if (animationController.shouldRender('portfolio-canvas-container')) {
             time += 0.01;
 
-            // Clear old connections
-            connections.forEach(line => scene.remove(line));
-            connections.length = 0;
+            crystals.forEach((c, idx) => {
+                // Smooth rotation
+                c.rotation.x += c.userData.rotSpeed.x;
+                c.rotation.y += c.userData.rotSpeed.y;
+                c.rotation.z += c.userData.rotSpeed.z;
 
-            // Update stars and create connections
-            stars.forEach((star, i) => {
-                // Twinkle effect
-                const opacity = star.userData.baseOpacity +
-                    Math.sin(time * star.userData.pulseSpeed + star.userData.twinkleOffset) * 0.3;
-                star.material.opacity = Math.max(0.2, opacity);
+                // Gentle floating motion
+                c.position.y += Math.sin(time * 0.5 + c.userData.floatOffset) * 0.015;
+                c.position.x += Math.cos(time * 0.3 + c.userData.floatOffset) * 0.005;
 
-                // Gentle drift
-                star.position.y += Math.sin(time * 0.5 + i) * 0.002;
-
-                // Connect nearby stars
-                let connectionCount = 0;
-                for (let j = i + 1; j < stars.length && connectionCount < 3; j++) {
-                    const dist = star.position.distanceTo(stars[j].position);
-
-                    if (dist < 4) {
-                        const geometry = new THREE.BufferGeometry().setFromPoints([
-                            star.position,
-                            stars[j].position
-                        ]);
-                        const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
-                            color: 0x00b894,
-                            transparent: true,
-                            opacity: (1 - dist / 4) * 0.15
-                        }));
-                        scene.add(line);
-                        connections.push(line);
-                        connectionCount++;
-                    }
-                }
+                // Pulsing scale and opacity
+                const pulse = 1 + Math.sin(time * 2 + idx) * 0.15;
+                c.scale.set(pulse, pulse, pulse);
+                c.material.opacity = 0.2 + Math.sin(time + idx) * 0.1;
             });
 
-            // Slow rotation
-            scene.rotation.z = Math.sin(time * 0.1) * 0.05;
+            // Subtle scene rotation for depth
+            scene.rotation.y = Math.sin(time * 0.2) * 0.1;
 
             renderer.render(scene, camera);
         }
@@ -1211,7 +1213,7 @@ function animateStats(container) {
         const timer = setInterval(() => {
             current += step;
             if (current >= target) {
-                stat.textContent = target + (stat.dataset.suffix || '+');
+                stat.textContent = target + (stat.dataset.suffix || '');
                 clearInterval(timer);
             } else {
                 stat.textContent = Math.floor(current);
@@ -1235,12 +1237,67 @@ function openCalendar() {
     window.open('https://wa.me/923338010986', '_blank');
 }
 
+function initRoadAnimation() {
+    const roadPath = document.getElementById('road-path');
+    const roadTraveler = document.getElementById('road-traveler');
+    const section = document.getElementById('process-section');
+    if (!roadPath || !roadTraveler || !section) return;
+
+    const pathLength = roadPath.getTotalLength();
+    roadPath.style.strokeDasharray = pathLength;
+    roadPath.style.strokeDashoffset = pathLength;
+
+    let targetProgress = 0;
+    let currentProgress = 0;
+    const lerpFactor = 0.1; // Smoothness factor (0 to 1)
+
+    // Scroll listener updates the target
+    window.addEventListener('scroll', () => {
+        const rect = section.getBoundingClientRect();
+        const viewHeight = window.innerHeight;
+        const startTrigger = viewHeight * 0.5;
+
+        let progress = (startTrigger - rect.top) / (rect.height);
+        targetProgress = Math.min(Math.max(progress, 0), 1);
+    });
+
+    // Animation loop handles the smoothing (Lerp)
+    function animate() {
+        // Smoothly approach the target
+        currentProgress += (targetProgress - currentProgress) * lerpFactor;
+
+        // Apply progress to visuals
+        roadPath.style.strokeDashoffset = pathLength * (1 - currentProgress);
+
+        const point = roadPath.getPointAtLength(currentProgress * pathLength);
+        roadTraveler.style.left = `${point.x}%`;
+        roadTraveler.style.top = `${point.y}%`;
+        roadTraveler.style.transform = `translate(-50%, -50%)`;
+
+        // Sync content reveals with smoothed progress
+        const thresholds = [0.1, 0.35, 0.6, 0.85];
+        const steps = document.querySelectorAll('.process-step');
+        steps.forEach((step, idx) => {
+            if (currentProgress >= thresholds[idx]) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
     initHeroParticles();
     initAboutShapes();
     initDNAHelix();
     initServicesStream();
-    initPortfolioConstellation();
+    initPortfolioCrystals();
+    initRoadAnimation();
     observeSections();
 });
