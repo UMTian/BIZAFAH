@@ -132,7 +132,7 @@
                     <div class="relative section-hidden">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="glass-card p-6 rounded-lg text-center">
-                                <div class="stat-number" data-target="150">0</div>
+                                <div class="stat-number" data-target="25">0</div>
                                 <div class="text-gray-400 text-sm uppercase tracking-wider">Projects Delivered</div>
                             </div>
                             <div class="glass-card p-6 rounded-lg text-center">
@@ -140,12 +140,13 @@
                                 <div class="text-gray-400 text-sm uppercase tracking-wider">Client Retention %</div>
                             </div>
                             <div class="glass-card p-6 rounded-lg text-center">
-                                <div class="stat-number" data-target="12">0</div>
+                                <div class="stat-number" data-target="4">0</div>
                                 <div class="text-gray-400 text-sm uppercase tracking-wider">Countries Served</div>
                             </div>
                             <div class="glass-card p-6 rounded-lg text-center">
-                                <div class="stat-number" data-target="340">0</div>
-                                <div class="text-gray-400 text-sm uppercase tracking-wider">% Avg ROI</div>
+                                <div class="stat-number" data-target="100">0</div>
+                                <div class="text-gray-400 text-sm uppercase tracking-wider">Customer Satisfaction %
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -311,36 +312,64 @@
                             <div class="space-y-4">
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'web')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">Web
-                                            Development</h4>
-                                        <span
-                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#00b894]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">High-performance digital experiences that load
-                                        instantly, convert consistently, and scale with your growth.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                                Web Development</h4>
+                                            <span
+                                                class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">High-performance digital experiences that load
+                                            instantly, convert consistently, and scale with your growth.</p>
+                                    </div>
                                 </div>
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'analytics')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
-                                            Data Analytics</h4>
-                                        <span
-                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#00b894]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Transform complex datasets into actionable business
-                                        intelligence through advanced visualization.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                                Data Analytics</h4>
+                                            <span
+                                                class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Transform complex datasets into actionable
+                                            business intelligence through advanced visualization.</p>
+                                    </div>
                                 </div>
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'ai')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">AI
-                                            Automation</h4>
-                                        <span
-                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#00b894]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Intelligent automation and ML solutions designed to
-                                        optimize workflows and drive smart decisions.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                                AI Automation</h4>
+                                            <span
+                                                class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Intelligent automation and ML solutions
+                                            designed to optimize workflows and drive smart decisions.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -364,47 +393,90 @@
                             <div class="space-y-4">
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'branding')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">Brand
-                                            Identity</h4>
-                                        <span
-                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#9b59b6]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Visual systems that capture your essence and
-                                        communicate your value proposition with impact.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
+                                                Brand Identity</h4>
+                                            <span
+                                                class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Visual systems that capture your essence and
+                                            communicate your value proposition with impact.</p>
+                                    </div>
                                 </div>
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'design')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">UI/UX
-                                            Design</h4>
-                                        <span
-                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#9b59b6]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">User-centered design creating intuitive, accessible
-                                        interfaces backed by research and testing.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
+                                                UI/UX Design</h4>
+                                            <span
+                                                class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">User-centered design creating intuitive,
+                                            accessible interfaces backed by research and testing.</p>
+                                    </div>
                                 </div>
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'motion')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
-                                            Photography & Videography</h4>
-                                        <span
-                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#9b59b6]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                                            </path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Professional visual storytelling through
-                                        high-quality commercial photography and video production.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
+                                                Photography & Videography</h4>
+                                            <span
+                                                class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Professional visual storytelling through
+                                            high-quality commercial photography and video production.</p>
+                                    </div>
                                 </div>
                                 <div class="service-card p-5 rounded-xl cursor-pointer group"
                                     onclick="router.navigate('service-detail', 'graphic')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
-                                            Visual Design</h4>
-                                        <span
-                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#9b59b6]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 00-2 2z">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Premium graphics and artistic visuals across all
-                                        physical and digital brand touchpoints.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
+                                                Video Editing</h4>
+                                            <span
+                                                class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">High-impact cinematic editing, motion graphics,
+                                            and color grading for commercials, social media, and brand documentaries.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -427,38 +499,67 @@
                                 <h3 class="text-3xl font-bold text-white tracking-tight">Marketing</h3>
                             </div>
                             <div class="space-y-4">
-                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                <div class="service-card p-5 rounded-xl cursor-pointer group flex items-start gap-4"
                                     onclick="router.navigate('service-detail', 'social')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
-                                            Social Media Marketing</h4>
-                                        <span
-                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#00b894]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Strategic social media management and campaigns to
-                                        build your community and brand presence.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                                Social Media Marketing</h4>
+                                            <span
+                                                class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Strategic social media management and campaigns
+                                            to build your community and brand presence.</p>
+                                    </div>
                                 </div>
-                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                <div class="service-card p-5 rounded-xl cursor-pointer group flex items-start gap-4"
                                     onclick="router.navigate('service-detail', 'content')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
-                                            Content Creation</h4>
-                                        <span
-                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#00b894]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6m-6 4h10">
+                                            </path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">High-engagement content designed to tell your story
-                                        and resonate with your target audience.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                                Content Creation</h4>
+                                            <span
+                                                class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">High-engagement content designed to tell your
+                                            story and resonate with your target audience.</p>
+                                    </div>
                                 </div>
-                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                <div class="service-card p-5 rounded-xl cursor-pointer group flex items-start gap-4"
                                     onclick="router.navigate('service-detail', 'seo')">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">SEO &
-                                            Analytics</h4>
-                                        <span
-                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    <div class="service-icon-container">
+                                        <svg class="w-8 h-8 text-[#00b894]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-400 text-sm">Technical SEO and analytics to dominate search
-                                        results and track user behavior.</p>
+                                    <div class="service-content flex-1">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                                SEO & Analytics</h4>
+                                            <span
+                                                class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm">Technical SEO and analytics to dominate search
+                                            results and track user behavior.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -501,7 +602,7 @@
                                     <div class="text-[#00b894] text-sm font-medium mb-2">E-Commerce</div>
                                     <h3 class="text-2xl font-bold mb-2">Luxury Retail Platform</h3>
                                     <div class="flex items-center gap-2 text-3xl font-bold text-white">
-                                        <span class="text-[#00b894]">+180%</span>
+                                        <span class="text-[#00b894]">180%</span>
                                         <span class="text-lg font-normal text-gray-300">Revenue Growth</span>
                                     </div>
                                 </div>
@@ -523,7 +624,7 @@
                                     <div class="text-[#9b59b6] text-sm font-medium mb-2">FinTech</div>
                                     <h3 class="text-2xl font-bold mb-2">Banking App Redesign</h3>
                                     <div class="flex items-center gap-2 text-3xl font-bold text-white">
-                                        <span class="text-[#9b59b6]">2M+</span>
+                                        <span class="text-[#9b59b6]">2M</span>
                                         <span class="text-lg font-normal text-gray-300">New Users</span>
                                     </div>
                                 </div>
@@ -571,82 +672,189 @@
                         from the first node of an idea to its mass-scale evolution.</p>
                 </div>
 
-                <div class="relative">
-                    <!-- Progress Line (Animated) -->
-                    <div class="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-[#00b894] via-[#9b59b6] to-[#00b894] opacity-20 hidden md:block"
-                        style="transform: translateX(-50%)"></div>
+                <div class="relative py-20 min-h-[1200px]">
+                    <!-- Background Visual Fill: Digital circuit network -->
+                    <div class="absolute inset-0 opacity-10 pointer-events-none hidden md:block">
+                        <svg width="100%" height="100%" viewBox="0 0 1200 1200" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 100H300V300H100V100Z" stroke="var(--aqua)" stroke-width="0.5" />
+                            <path d="M900 800H1100V1000H900V800Z" stroke="var(--purple)" stroke-width="0.5" />
+                            <circle cx="200" cy="500" r="50" stroke="var(--aqua)" stroke-width="0.5" />
+                            <circle cx="1000" cy="300" r="80" stroke="var(--purple)" stroke-width="0.5" />
+                            <line x1="0" y1="200" x2="1200" y2="200" stroke="currentColor" stroke-dasharray="10 10" />
+                            <line x1="0" y1="1000" x2="1200" y2="1000" stroke="currentColor" stroke-dasharray="10 10" />
+                        </svg>
+                    </div>
 
-                    <div class="space-y-24">
-                        <!-- Step 1 -->
-                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden">
+                    <!-- Enhanced Zigzag Path -->
+                    <div class="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style="z-index: 0;">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <defs>
+                                <filter id="path-glow">
+                                    <feGaussianBlur stdDeviation="1.5" result="blur" />
+                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                </filter>
+                                <linearGradient id="road-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:var(--aqua);stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:var(--purple);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:var(--aqua);stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Underlying Shadow Path -->
+                            <path
+                                d="M 50 0 C 50 10 85 10 85 25 C 85 40 15 40 15 50 C 15 65 85 65 85 75 C 85 90 50 90 50 100"
+                                fill="none" stroke="black" stroke-width="6" stroke-opacity="0.3" class="blur-md" />
+
+                            <!-- The Animated Road -->
+                            <path id="road-path"
+                                d="M 50 0 C 50 10 85 10 85 25 C 85 40 15 40 15 50 C 15 65 85 65 85 75 C 85 90 50 90 50 100"
+                                fill="none" stroke="url(#road-gradient)" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-dasharray="1 3" filter="url(#path-glow)" />
+
+                            <!-- Animated Pulse Path -->
+                            <path id="road-pulse"
+                                d="M 50 0 C 50 10 85 10 85 25 C 85 40 15 40 15 50 C 15 65 85 65 85 75 C 85 90 50 90 50 100"
+                                fill="none" stroke="white" stroke-width="0.5" stroke-opacity="0.5"
+                                stroke-dasharray="5 95" />
+                        </svg>
+
+                        <!-- Floating Traveler node with HUD overlay -->
+                        <div id="road-traveler" class="absolute z-20">
+                            <div class="relative w-12 h-12">
+                                <div class="absolute inset-0 bg-white shadow-[0_0_20px_#fff] rounded-full scale-50">
+                                </div>
+                                <!-- HUD Ring -->
+                                <div
+                                    class="absolute -inset-4 border border-white/20 rounded-full animate-[spin_4s_linear_infinite]">
+                                </div>
+                                <div
+                                    class="absolute -inset-6 border border-dashed border-white/10 rounded-full animate-[spin_8s_linear_infinite_reverse]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-48 relative">
+                        <!-- Step 1: Right Biased -->
+                        <div
+                            class="flex flex-col md:flex-row items-center gap-12 section-hidden md:translate-x-[20%] process-step">
                             <div class="flex-1 md:text-right">
-                                <h3 class="text-2xl font-bold text-white mb-3">01. Discovery & Strategy</h3>
-                                <p class="text-gray-400">We analyze your market landscape, identify technical
-                                    bottlenecks, and define a roadmap that aligns with your core business velocity.</p>
+                                <span
+                                    class="text-xs font-mono text-[#00b894] tracking-widest uppercase mb-2 block">Phase
+                                    01</span>
+                                <h3 class="text-3xl font-black text-white mb-4">Discovery & Strategy</h3>
+                                <p class="text-gray-400 max-w-md ml-auto">We decode your business DNA to architect a
+                                    digital trajectory that doesn't just compete, but defines the category.</p>
                             </div>
-                            <div
-                                class="w-12 h-12 bg-[#00b894] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#00b894/30]">
-                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
+                            <div class="process-node group">
+                                <div class="node-bg bg-[#00b894]"></div>
+                                <div class="node-content text-black">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <!-- Side Decorative HUD -->
+                                <div
+                                    class="absolute left-full ml-8 hidden lg:block opacity-20 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-24 h-px bg-gradient-to-r from-[#00b894] to-transparent"></div>
+                                    <div class="text-[10px] font-mono text-[#00b894] mt-1 uppercase">Analysis_Active
+                                    </div>
+                                </div>
                             </div>
                             <div class="flex-1 hidden md:block"></div>
                         </div>
 
-                        <!-- Step 2 -->
-                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden"
-                            style="transition-delay: 0.1s">
+                        <!-- Step 2: Left Biased -->
+                        <div
+                            class="flex flex-col md:flex-row-reverse items-center gap-12 section-hidden md:-translate-x-[20%] process-step">
+                            <div class="flex-1 md:text-left">
+                                <span
+                                    class="text-xs font-mono text-[#9b59b6] tracking-widest uppercase mb-2 block">Phase
+                                    02</span>
+                                <h3 class="text-3xl font-black text-white mb-4">Design & Architecture</h3>
+                                <p class="text-gray-400 max-w-md">Crafting high-fidelity visual blueprints and technical
+                                    frameworks optimized for neon-gravity environments.</p>
+                            </div>
+                            <div class="process-node group">
+                                <div class="node-bg bg-[#9b59b6]"></div>
+                                <div class="node-content text-black">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <!-- Side Decorative HUD -->
+                                <div
+                                    class="absolute right-full mr-8 hidden lg:block opacity-20 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-24 h-px bg-gradient-to-l from-[#9b59b6] to-transparent"></div>
+                                    <div class="text-[10px] font-mono text-[#9b59b6] mt-1 text-right uppercase">
+                                        System_Build</div>
+                                </div>
+                            </div>
                             <div class="flex-1 hidden md:block"></div>
-                            <div
-                                class="w-12 h-12 bg-[#9b59b6] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#9b59b6/30]">
-                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-white mb-3">02. Design & Architecture</h3>
-                                <p class="text-gray-400">Our architects create robust visual systems and scalable
-                                    technical foundations designed to handle exponential growth without compromise.</p>
-                            </div>
                         </div>
 
-                        <!-- Step 3 -->
-                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden"
-                            style="transition-delay: 0.2s">
+                        <!-- Step 3: Right Biased -->
+                        <div
+                            class="flex flex-col md:flex-row items-center gap-12 section-hidden md:translate-x-[20%] process-step">
                             <div class="flex-1 md:text-right">
-                                <h3 class="text-2xl font-bold text-white mb-3">03. Engineering & Craft</h3>
-                                <p class="text-gray-400">We breathe life into the architecture using modern tech stacks.
-                                    Iterative builds and obsessive testing ensure a flawless digital fingerprint.</p>
+                                <span
+                                    class="text-xs font-mono text-[#00b894] tracking-widest uppercase mb-2 block">Phase
+                                    03</span>
+                                <h3 class="text-3xl font-black text-white mb-4">Engineering & Craft</h3>
+                                <p class="text-gray-400 max-w-md ml-auto">Full-stack assembly where raw code meets
+                                    obsidian-grade aesthetics. Iterative builds for peak performance.</p>
                             </div>
-                            <div
-                                class="w-12 h-12 bg-[#00b894] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#00b894/30]">
-                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                                </svg>
+                            <div class="process-node group">
+                                <div class="node-bg bg-[#00b894]"></div>
+                                <div class="node-content text-black">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                    </svg>
+                                </div>
+                                <!-- Side Decorative HUD -->
+                                <div
+                                    class="absolute left-full ml-8 hidden lg:block opacity-20 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-24 h-px bg-gradient-to-r from-[#00b894] to-transparent"></div>
+                                    <div class="text-[10px] font-mono text-[#00b894] mt-1 uppercase">Code_Extraction
+                                    </div>
+                                </div>
                             </div>
                             <div class="flex-1 hidden md:block"></div>
                         </div>
 
-                        <!-- Step 4 -->
-                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden"
-                            style="transition-delay: 0.3s">
+                        <!-- Step 4: Left Biased -->
+                        <div
+                            class="flex flex-col md:flex-row-reverse items-center gap-12 section-hidden md:-translate-x-[20%] process-step">
+                            <div class="flex-1 md:text-left">
+                                <span
+                                    class="text-xs font-mono text-[#9b59b6] tracking-widest uppercase mb-2 block">Phase
+                                    04</span>
+                                <h3 class="text-3xl font-black text-white mb-4">Launch & Evolution</h3>
+                                <p class="text-gray-400 max-w-md">Deployment is just the start. We monitor, optimize,
+                                    and evolve your platform in real-time.</p>
+                            </div>
+                            <div class="process-node group">
+                                <div class="node-bg bg-[#9b59b6]"></div>
+                                <div class="node-content text-black">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <!-- Side Decorative HUD -->
+                                <div
+                                    class="absolute right-full mr-8 hidden lg:block opacity-20 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-24 h-px bg-gradient-to-l from-[#9b59b6] to-transparent"></div>
+                                    <div class="text-[10px] font-mono text-[#9b59b6] mt-1 text-right uppercase">
+                                        Mass_Scale</div>
+                                </div>
+                            </div>
                             <div class="flex-1 hidden md:block"></div>
-                            <div
-                                class="w-12 h-12 bg-[#9b59b6] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#9b59b6/30]">
-                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-white mb-3">04. Launch & Optimization</h3>
-                                <p class="text-gray-400">Post-deployment, we monitor performance nodes in real-time to
-                                    optimize conversions and ensure your digital engine stays ahead of the curve.</p>
-                            </div>
                         </div>
                     </div>
                 </div>
