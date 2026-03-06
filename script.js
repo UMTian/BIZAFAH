@@ -1,1100 +1,1007 @@
-// Router System
-const router = {
-    currentPage: 'home',
-    history: [],
+<!DOCTYPE html>
+<html lang="en">
 
-    navigate(page, param = null) {
-        this.history.push(this.currentPage);
-        this.currentPage = page;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIZAFAH - Digital Innovation Studio</title>
 
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        // Show target page
-        const targetPage = document.getElementById(`page-${page}`);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            window.scrollTo(0, 0);
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-            // Load dynamic content if needed
-            if (page === 'service-detail' && param) {
-                loadServiceDetail(param);
-            } else if (page === 'case-study' && param) {
-                loadCaseStudy(param);
-            } else if (page === 'portfolio') {
-                loadPortfolio();
-            }
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
-            // Re-initialize animations
-            setTimeout(() => {
-                observeSections();
-            }, 100);
-        }
-    },
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 
-    back() {
-        if (this.history.length > 0) {
-            const prev = this.history.pop();
-            this.currentPage = prev;
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${prev}`).classList.add('active');
-            window.scrollTo(0, 0);
-            setTimeout(observeSections, 100);
-        }
-    }
-};
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
 
-// Service Detail Data
-const serviceData = {
-    strategy: {
-        title: "Digital Strategy",
-        subtitle: "Navigate the digital landscape with confidence",
-        description: "Our strategic consulting services help organizations identify opportunities, mitigate risks, and create actionable roadmaps for digital transformation.",
-        problems: [
-            "Unclear digital direction and priorities",
-            "Legacy systems hindering growth",
-            "Competitors outpacing your innovation",
-            "Siloed departments and inefficiencies",
-            "Difficulty measuring digital ROI"
-        ],
-        approach: [
-            "Discovery & Audit: Comprehensive analysis of your current state",
-            "Strategy Formulation: Clear roadmap aligned with business goals",
-            "Implementation Planning: Phased execution with measurable milestones",
-            "Continuous Optimization: Data-driven refinements and improvements"
-        ],
-        deliverables: [
-            "Digital Maturity Assessment",
-            "Competitive Analysis Report",
-            "3-Year Digital Roadmap",
-            "Technology Stack Recommendations",
-            "KPI Framework & Dashboard"
-        ]
-    },
-    web: {
-        title: "Web Development",
-        subtitle: "High-performance digital experiences",
-        description: "We build websites and web applications that load instantly, convert consistently, and scale effortlessly with your business growth.",
-        problems: [
-            "Slow loading times hurting SEO",
-            "Poor mobile experience",
-            "Difficulty updating content",
-            "Security vulnerabilities",
-            "Inability to handle traffic spikes"
-        ],
-        approach: [
-            "Architecture Design: Scalable, secure foundation",
-            "Agile Development: Iterative builds with continuous feedback",
-            "Performance Optimization: Sub-second load times guaranteed",
-            "Launch & Support: 24/7 monitoring and maintenance"
-        ],
-        deliverables: [
-            "Custom Website or Web App",
-            "CMS Integration",
-            "Performance Optimization",
-            "Security Hardening",
-            "Documentation & Training"
-        ]
-    },
-    branding: {
-        title: "Brand Identity",
-        subtitle: "Stand out in a crowded market",
-        description: "We create visual identities that capture your essence and communicate your value proposition with clarity and impact.",
-        problems: [
-            "Inconsistent brand presentation",
-            "Outdated visual identity",
-            "Poor brand recognition",
-            "Misalignment with target audience",
-            "Lack of brand guidelines"
-        ],
-        approach: [
-            "Brand Discovery: Understanding your essence and audience",
-            "Concept Development: Exploring visual directions",
-            "Identity Design: Logo, typography, color systems",
-            "Guideline Creation: Comprehensive brand manual"
-        ],
-        deliverables: [
-            "Logo System (Primary, Secondary, Icons)",
-            "Color Palette & Typography",
-            "Brand Guidelines Book",
-            "Marketing Templates",
-            "Brand Strategy Document"
-        ]
-    },
-    marketing: {
-        title: "Growth Marketing",
-        subtitle: "Acquire, engage, and retain customers",
-        description: "Data-driven marketing strategies that deliver measurable business growth through optimized acquisition channels and retention programs.",
-        problems: [
-            "High customer acquisition costs",
-            "Low conversion rates",
-            "Poor customer retention",
-            "Inability to scale campaigns",
-            "Lack of attribution clarity"
-        ],
-        approach: [
-            "Channel Analysis: Identifying highest-ROI opportunities",
-            "Campaign Setup: Precision targeting and creative testing",
-            "Automation: Scaling with smart workflows",
-            "Optimization: Continuous A/B testing and refinement"
-        ],
-        deliverables: [
-            "Marketing Strategy & Calendar",
-            "Campaign Setup & Management",
-            "Marketing Automation",
-            "Analytics & Reporting Dashboard",
-            "Content Strategy"
-        ]
-    },
-    ai: {
-        title: "AI Integration",
-        subtitle: "Intelligent automation for competitive advantage",
-        description: "Leverage machine learning and artificial intelligence to automate processes, gain insights, and create personalized experiences at scale.",
-        problems: [
-            "Manual processes consuming resources",
-            "Inability to personalize at scale",
-            "Data overload without insights",
-            "Reactive rather than predictive operations",
-            "Falling behind AI-adopting competitors"
-        ],
-        approach: [
-            "Use Case Identification: High-impact AI opportunities",
-            "Data Preparation: Cleaning and structuring for ML",
-            "Model Development: Custom AI solutions",
-            "Integration: Seamless deployment into workflows"
-        ],
-        deliverables: [
-            "AI Strategy Roadmap",
-            "Custom ML Models",
-            "Automation Workflows",
-            "Analytics Dashboard",
-            "Team Training & Documentation"
-        ]
-    },
-    mobile: {
-        title: "Mobile Apps",
-        subtitle: "Native experiences that users love",
-        description: "iOS and Android applications built with cutting-edge technologies that deliver smooth performance and intuitive user experiences.",
-        problems: [
-            "Poor app store ratings",
-            "High uninstall rates",
-            "Slow performance",
-            "Security concerns",
-            "Difficulty maintaining code"
-        ],
-        approach: [
-            "UX Research: Understanding user needs and behaviors",
-            "Prototyping: Rapid iteration on user flows",
-            "Development: Native or cross-platform excellence",
-            "Launch: App store optimization and release"
-        ],
-        deliverables: [
-            "iOS & Android Apps",
-            "App Store Optimization",
-            "Backend Infrastructure",
-            "Analytics Integration",
-            "Maintenance & Updates"
-        ]
-    },
-    design: {
-        title: "UI/UX Design",
-        subtitle: "Interfaces that delight and convert",
-        description: "User-centered design processes that create intuitive, accessible, and beautiful interfaces backed by thorough research and testing.",
-        problems: [
-            "High bounce rates",
-            "User confusion and frustration",
-            "Low conversion rates",
-            "Accessibility issues",
-            "Inconsistent user experience"
-        ],
-        approach: [
-            "User Research: Interviews, surveys, and analytics",
-            "Information Architecture: Logical content structure",
-            "Wireframing & Prototyping: Low to high fidelity",
-            "Testing & Iteration: Continuous improvement"
-        ],
-        deliverables: [
-            "User Research Report",
-            "Wireframes & Prototypes",
-            "High-Fidelity UI Designs",
-            "Design System",
-            "Usability Test Results"
-        ]
-    },
-    motion: {
-        title: "Motion Graphics",
-        subtitle: "Bringing your story to life",
-        description: "High-quality animations and motion design that capture attention and communicate complex ideas simply and effectively.",
-        problems: [
-            "Static content failing to engage",
-            "Difficulty explaining complex processes",
-            "High drop-off rates on explanations",
-            "Brand feeling 'static' or 'old'",
-            "Low social media engagement"
-        ],
-        approach: [
-            "Storyboarding: Planning the visual narrative",
-            "Style Frames: Defining the look and feel",
-            "Animation: Bringing the designs to life",
-            "Sound Design: Adding the final atmospheric touch"
-        ],
-        deliverables: [
-            "Explainer Videos",
-            "Logo Animations",
-            "Social Media Motion Content",
-            "UI Motion Guidelines",
-            "3D Product Visualizations"
-        ]
-    },
-    graphic: {
-        title: "Visual Design",
-        subtitle: "Stunning visuals for every platform",
-        description: "Comprehensive graphic design services that ensure your brand looks premium and professional across all physical and digital touchpoints.",
-        problems: [
-            "Low-quality marketing materials",
-            "Inconsistent visual style",
-            "Poor conversion on ad creatives",
-            "Brand looking 'unprofessional'",
-            "Difficulty standing out visually"
-        ],
-        approach: [
-            "Visual Audit: Checking current brand assets",
-            "Creative Direction: Setting the visual tone",
-            "Design Production: Creating the actual assets",
-            "Quality Control: Ensuring pixel perfection"
-        ],
-        deliverables: [
-            "Social Media Kits",
-            "Ad Creatives",
-            "Print Materials",
-            "Digital Assets",
-            "Presentation Designs"
-        ]
-    },
-    seo: {
-        title: "SEO & Analytics",
-        subtitle: "Data-driven visibility and insights",
-        description: "Technical SEO and comprehensive data analytics that help you dominate search results and understand exactly how your users behave.",
-        problems: [
-            "Low organic traffic",
-            "Ranking for the wrong keywords",
-            "Technical SEO errors",
-            "No clear data on user behavior",
-            "High bounce rates from search"
-        ],
-        approach: [
-            "Technical Audit: Fixing underlying site issues",
-            "Keyword Research: Finding high-intent opportunities",
-            "On-Page Optimization: Tuning content for search",
-            "Analytics Setup: Tracking what matters"
-        ],
-        deliverables: [
-            "SEO Audit Report",
-            "Keyword Strategy",
-            "Monthly Performance Reports",
-            "Custom Analytics Dashboard",
-            "Link Building Roadmap"
-        ]
-    }
-};
+<body>
+    <!-- Background Patches -->
+    <div class="bg-patches"></div>
+    <div class="grid-overlay"></div>
 
-// Case Study Data
-const caseStudyData = {
-    ecommerce: {
-        title: "Luxury E-Commerce Platform",
-        client: "Prestige Retail Group",
-        category: "E-Commerce",
-        overview: "A complete digital transformation for a luxury retailer seeking to modernize their online presence and capture the growing high-end digital market.",
-        problem: "Legacy platform with 8+ second load times, 2% conversion rate, and inability to handle flash sale traffic. Brand perception was suffering due to poor digital experience.",
-        strategy: "Headless commerce architecture with React frontend, AI-powered personalization, and mobile-first luxury experience design.",
-        execution: "6-month phased rollout including platform migration, custom AR try-on features, and VIP customer portal.",
-        results: [
-            { label: "Revenue Growth", value: "+180%" },
-            { label: "Conversion Rate", value: "4.5%" },
-            { label: "Page Load Time", value: "0.8s" },
-            { label: "Mobile Revenue", value: "+240%" }
-        ]
-    },
-    fintech: {
-        title: "Neobank App Redesign",
-        client: "Future Finance",
-        category: "FinTech",
-        overview: "Complete UX overhaul of a digital banking application to improve user engagement and compete with established fintech players.",
-        problem: "Complex navigation causing 60% drop-off during onboarding. Users complained about 'too many steps' to complete basic transactions.",
-        strategy: "Simplified information architecture, biometric authentication, and predictive transaction features powered by ML.",
-        execution: "3-month design sprint followed by gradual feature rollout with extensive A/B testing.",
-        results: [
-            { label: "User Acquisition", value: "2M+" },
-            { label: "Onboarding Completion", value: "+85%" },
-            { label: "Daily Active Users", value: "+150%" },
-            { label: "App Store Rating", value: "4.9★" }
-        ]
-    },
-    healthcare: {
-        title: "Telemedicine Platform",
-        client: "MedConnect Health",
-        category: "Healthcare",
-        overview: "End-to-end telehealth solution enabling remote consultations, prescription management, and patient monitoring.",
-        problem: "Inefficient manual scheduling, no-show rates of 30%, and provider burnout from administrative tasks.",
-        strategy: "AI-powered triage, automated scheduling, integrated EHR, and remote monitoring devices.",
-        execution: "12-month development with strict HIPAA compliance, security audits, and provider training programs.",
-        results: [
-            { label: "Cost Reduction", value: "-40%" },
-            { label: "Patient Satisfaction", value: "4.8/5" },
-            { label: "No-Show Rate", value: "5%" },
-            { label: "Provider Efficiency", value: "+60%" }
-        ]
-    }
-};
-
-// Portfolio Data
-const portfolioItems = [
-    { id: 'ecommerce', title: "Luxury Retail Platform", category: "ecommerce", result: "+180% Revenue" },
-    { id: 'fintech', title: "Neobank Redesign", category: "fintech", result: "2M+ Users" },
-    { id: 'healthcare', title: "Telemedicine Platform", category: "healthcare", result: "-40% Costs" },
-    { id: 'saas', title: "B2B Analytics Dashboard", category: "saas", result: "+300% Engagement" },
-    { id: 'ecommerce2', title: "Fashion Marketplace", category: "ecommerce", result: "$50M GMV" },
-    { id: 'fintech2', title: "Crypto Trading App", category: "fintech", result: "$2B Volume" }
-];
-
-function loadServiceDetail(serviceId) {
-    const service = serviceData[serviceId];
-    if (!service) return;
-
-    const content = document.getElementById('service-content');
-    content.innerHTML = `
-        <div class="mb-12">
-            <div class="text-[#00b894] text-sm tracking-widest uppercase mb-4">Service Detail</div>
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">${service.title}</h1>
-            <p class="text-2xl text-gray-400">${service.subtitle}</p>
-        </div>
-
-        <div class="glass-card p-8 rounded-xl mb-12">
-            <p class="text-lg text-gray-300 leading-relaxed">${service.description}</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12 mb-12">
-            <div>
-                <h3 class="text-2xl font-bold mb-6 text-[#9b59b6]">Problems We Solve</h3>
-                <ul class="space-y-4">
-                    ${service.problems.map(p => `
-                        <li class="flex items-start gap-3">
-                            <span class="text-red-400 mt-1">✕</span>
-                            <span class="text-gray-300">${p}</span>
-                        </li>
-                    `).join('')}
-                </ul>
+    <!-- Navigation Elements (No Header Bar) -->
+    <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-50">
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="router.navigate('home')">
+            <div
+                class="w-10 h-10 overflow-hidden rounded-lg shadow-lg group-hover:shadow-[#00b894]/30 transition-shadow">
+                <img src="logo.jpeg" alt="BIZAFAH Logo" class="w-full h-full object-cover">
             </div>
-            <div>
-                <h3 class="text-2xl font-bold mb-6 text-[#00b894]">Our Approach</h3>
-                <div class="space-y-6">
-                    ${service.approach.map((step, i) => `
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 rounded-full bg-[#00b894]/10 border border-[#00b894]/30 flex items-center justify-center flex-shrink-0 text-[#00b894] font-bold text-sm">
-                                ${i + 1}
+            <span
+                class="text-2xl font-black tracking-tighter text-white uppercase group-hover:text-[#00b894] transition-colors">BIZAFAH</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link cursor-pointer" onclick="router.navigate('home')">Home</a>
+            <a class="nav-link cursor-pointer" onclick="router.navigate('services')">Services</a>
+            <a class="nav-link cursor-pointer" onclick="router.navigate('portfolio')">Portfolio</a>
+            <a class="nav-link cursor-pointer" onclick="router.navigate('about')">About</a>
+            <button class="btn-primary text-sm py-2 px-6" onclick="scrollToContact()">Book Meeting</button>
+        </div>
+
+        <button class="md:hidden text-2xl" onclick="toggleMobileMenu()">☰</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 hidden flex-col items-center justify-center gap-8">
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="router.navigate('home'); toggleMobileMenu()">Home</a>
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="router.navigate('services'); toggleMobileMenu()">Services</a>
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="router.navigate('portfolio'); toggleMobileMenu()">Portfolio</a>
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="router.navigate('about'); toggleMobileMenu()">About</a>
+    </div>
+
+    <!-- LANDING PAGE -->
+    <div id="page-home" class="page active">
+        <!-- Hero Section -->
+        <section class="section-full">
+            <div class="hero-3d-bg">
+                <div class="floating-sphere"></div>
+            </div>
+            <div id="hero-canvas-container" class="canvas-container"></div>
+
+            <div style="max-width: 900px;">
+                <h1
+                    class="text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-[#00b894] to-[#9b59b6]">
+                    we architect
+                    digital<br>dimensions</h1>
+                <div class="subhead" style="margin: 2rem 0 1.2rem;">
+                    immersive cyber-teal environments · AI-driven experience<br>
+                    where code meets neon gravity.
+                </div>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" class="btn-primary" onclick="scrollToContact()">BOOK A MEETING</a>
+                    <a href="#" class="btn-outline" onclick="router.navigate('portfolio')">Portfolio</a>
+                </div>
+                <div class="trust-line">
+                    <i class="fas fa-shield-alt"></i>
+                    trusted by 50+ digital pioneers · 0% downtime · ISO 27001
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-32 relative overflow-hidden" id="about-section">
+            <div class="canvas-container" id="about-canvas-container"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-[#050508] via-transparent to-[#050508]"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="section-hidden">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">We Don't Just Build.<br>We <span
+                                class="text-[#00b894]">Reimagine</span>.</h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                            In a world of digital noise, we create signal. Bizafah bridges the gap between ambitious
+                            vision and technical excellence, crafting digital experiences that don't just function—they
+                            transcend.
+                        </p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-2 bg-[#00b894] rounded-full mt-2 shadow-[0_0_10px_#00b894]"></div>
+                                <p class="text-gray-300"><strong>Vision-First Architecture:</strong> Every pixel serves
+                                    a strategic purpose.</p>
                             </div>
-                            <p class="text-gray-300">${step}</p>
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-2 bg-[#9b59b6] rounded-full mt-2 shadow-[0_0_10px_#9b59b6]"></div>
+                                <p class="text-gray-300"><strong>Future-Proof Engineering:</strong> Scalable systems
+                                    that grow with ambition.</p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-2 bg-[#00b894] rounded-full mt-2 shadow-[0_0_10px_#00b894]"></div>
+                                <p class="text-gray-300"><strong>Obsessive Craftsmanship:</strong> Precision in every
+                                    interaction.</p>
+                            </div>
                         </div>
-                    `).join('')}
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card p-8 rounded-xl mb-12">
-            <h3 class="text-2xl font-bold mb-6">What You Get</h3>
-            <div class="grid md:grid-cols-2 gap-4">
-                ${service.deliverables.map(d => `
-                    <div class="flex items-center gap-3 p-4 bg-white/5 rounded-lg">
-                        <span class="text-[#00b894]">✓</span>
-                        <span class="text-gray-300">${d}</span>
+                        <p class="text-[#00b894] font-medium text-lg border-l-2 border-[#00b894] pl-4">
+                            "Technology should feel like magic, engineered with the precision of science."
+                        </p>
                     </div>
-                `).join('')}
-            </div>
-        </div>
 
-        <div class="text-center">
-            <button class="btn-primary text-lg px-12 py-4" onclick="scrollToContact()">Start Your Project</button>
-        </div>
-    `;
-}
-
-function loadCaseStudy(caseId) {
-    const study = caseStudyData[caseId];
-    if (!study) return;
-
-    const content = document.getElementById('case-study-content');
-    content.innerHTML = `
-        <div class="mb-12">
-            <div class="text-[#00b894] text-sm tracking-widest uppercase mb-4">${study.category}</div>
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">${study.title}</h1>
-            <p class="text-xl text-gray-400">Client: ${study.client}</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            ${study.results.map(r => `
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="text-3xl font-bold text-[#00b894] mb-2">${r.value}</div>
-                    <div class="text-sm text-gray-400">${r.label}</div>
-                </div>
-            `).join('')}
-        </div>
-
-        <div class="space-y-12">
-            <div class="glass-card p-8 rounded-xl">
-                <h3 class="text-2xl font-bold mb-4 text-[#9b59b6]">Project Overview</h3>
-                <p class="text-gray-300 leading-relaxed">${study.overview}</p>
-            </div>
-
-            <div class="glass-card p-8 rounded-xl">
-                <h3 class="text-2xl font-bold mb-4 text-red-400">The Challenge</h3>
-                <p class="text-gray-300 leading-relaxed">${study.problem}</p>
-            </div>
-
-            <div class="glass-card p-8 rounded-xl">
-                <h3 class="text-2xl font-bold mb-4 text-[#00b894]">Our Strategy</h3>
-                <p class="text-gray-300 leading-relaxed">${study.strategy}</p>
-            </div>
-
-            <div class="glass-card p-8 rounded-xl">
-                <h3 class="text-2xl font-bold mb-4 text-blue-400">Execution</h3>
-                <p class="text-gray-300 leading-relaxed">${study.execution}</p>
-            </div>
-        </div>
-
-        <div class="mt-12 text-center">
-            <button class="btn-primary text-lg px-12 py-4" onclick="scrollToContact()">Discuss Your Project</button>
-        </div>
-    `;
-}
-
-function loadPortfolio() {
-    const grid = document.getElementById('portfolio-grid');
-    grid.innerHTML = portfolioItems.map((item, i) => `
-        <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: ${i * 0.1}s" onclick="router.navigate('case-study', '${item.id}')" data-category="${item.category}">
-            <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden rounded-lg">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#00b894]/10 to-[#9b59b6]/10"></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="text-4xl font-bold text-white/10">${item.title.charAt(0)}</div>
-                </div>
-                <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
-                    <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <div class="text-[#00b894] text-xs font-medium mb-1 uppercase">${item.category}</div>
-                        <h3 class="text-xl font-bold mb-1">${item.title}</h3>
-                        <div class="text-[#00b894] font-bold">${item.result}</div>
+                    <div class="relative section-hidden">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="glass-card p-6 rounded-lg text-center">
+                                <div class="stat-number" data-target="150">0</div>
+                                <div class="text-gray-400 text-sm uppercase tracking-wider">Projects Delivered</div>
+                            </div>
+                            <div class="glass-card p-6 rounded-lg text-center">
+                                <div class="stat-number" data-target="98">0</div>
+                                <div class="text-gray-400 text-sm uppercase tracking-wider">Client Retention %</div>
+                            </div>
+                            <div class="glass-card p-6 rounded-lg text-center">
+                                <div class="stat-number" data-target="12">0</div>
+                                <div class="text-gray-400 text-sm uppercase tracking-wider">Countries Served</div>
+                            </div>
+                            <div class="glass-card p-6 rounded-lg text-center">
+                                <div class="stat-number" data-target="340">0</div>
+                                <div class="text-gray-400 text-sm uppercase tracking-wider">% Avg ROI</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#050508] to-transparent z-10"></div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="py-32 relative" id="why-section">
+            <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-[#050508] to-transparent z-10"></div>
+            <div class="canvas-container" id="why-canvas-container"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-20 section-hidden">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Why <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-[#00b894] to-[#9b59b6]">Bizafah</span>?
+                    </h2>
+                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">We combine strategic thinking with technical
+                        mastery to deliver results that matter.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                    <!-- Card 1 -->
+                    <div class="glass-card p-8 rounded-xl tilt-card section-hidden" style="transition-delay: 0.1s">
+                        <div class="tilt-content">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 rounded-lg flex items-center justify-center mb-6 border border-[#00b894]/30">
+                                <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Velocity Without Compromise</h3>
+                            <p class="text-gray-400 leading-relaxed">Rapid deployment cycles that maintain
+                                enterprise-grade quality. Move fast without breaking things.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="glass-card p-8 rounded-xl tilt-card section-hidden" style="transition-delay: 0.2s">
+                        <div class="tilt-content">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 rounded-lg flex items-center justify-center mb-6 border border-[#00b894]/30">
+                                <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Data-Driven Creativity</h3>
+                            <p class="text-gray-400 leading-relaxed">Beautiful designs backed by behavioral analytics.
+                                We create what converts, not just what looks good.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="glass-card p-8 rounded-xl tilt-card section-hidden" style="transition-delay: 0.3s">
+                        <div class="tilt-content">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 rounded-lg flex items-center justify-center mb-6 border border-[#00b894]/30">
+                                <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Enterprise Security</h3>
+                            <p class="text-gray-400 leading-relaxed">Bank-level security protocols baked into every
+                                solution. Your data fortress is our priority.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="glass-card p-8 rounded-xl tilt-card section-hidden" style="transition-delay: 0.4s">
+                        <div class="tilt-content">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 rounded-lg flex items-center justify-center mb-6 border border-[#00b894]/30">
+                                <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Dedicated Squads</h3>
+                            <p class="text-gray-400 leading-relaxed">Your personal A-team of specialists. No revolving
+                                doors, just consistent excellence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="glass-card p-8 rounded-xl tilt-card section-hidden" style="transition-delay: 0.5s">
+                        <div class="tilt-content">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 rounded-lg flex items-center justify-center mb-6 border border-[#00b894]/30">
+                                <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Continuous Evolution</h3>
+                            <p class="text-gray-400 leading-relaxed">We don't hand over and disappear. We evolve your
+                                digital presence as markets shift.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="glass-card p-8 rounded-xl tilt-card section-hidden" style="transition-delay: 0.6s">
+                        <div class="tilt-content">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 rounded-lg flex items-center justify-center mb-6 border border-[#00b894]/30">
+                                <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Risk-Free Partnership</h3>
+                            <p class="text-gray-400 leading-relaxed">Transparent pricing, clear milestones, and
+                                guaranteed satisfaction. We put our money where our mouth is.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Preview -->
+        <section class="py-32 relative overflow-hidden" id="services-section">
+            <div class="canvas-container" id="services-canvas-container"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="flex justify-between items-end mb-16 section-hidden">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">Our <span class="text-[#00b894]">Services</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg">Comprehensive digital solutions for modern enterprises.</p>
+                    </div>
+                    <button class="btn-secondary hidden md:block" onclick="router.navigate('services')">Explore All
+                        Services →</button>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-10 relative z-10">
+                    <!-- Development Category Card -->
+                    <div class="flex flex-col gap-6 section-hidden" style="transition-delay: 0.1s">
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#00b894]">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div
+                                    class="w-12 h-12 bg-[#00b894]/20 rounded-xl flex items-center justify-center border border-[#00b894]/30">
+                                    <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-3xl font-bold text-white tracking-tight">Development</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'web')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">Web
+                                            Development</h4>
+                                        <span
+                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">High-performance digital experiences that load
+                                        instantly, convert consistently, and scale with your growth.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'analytics')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                            Data Analytics</h4>
+                                        <span
+                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Transform complex datasets into actionable business
+                                        intelligence through advanced visualization.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'ai')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">AI
+                                            Automation</h4>
+                                        <span
+                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Intelligent automation and ML solutions designed to
+                                        optimize workflows and drive smart decisions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Creatives Category Card -->
+                    <div class="flex flex-col gap-6 section-hidden" style="transition-delay: 0.2s">
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#9b59b6]">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div
+                                    class="w-12 h-12 bg-[#9b59b6]/20 rounded-xl flex items-center justify-center border border-[#9b59b6]/30">
+                                    <svg class="w-6 h-6 text-[#9b59b6]" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-3xl font-bold text-white tracking-tight">Creatives</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'branding')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">Brand
+                                            Identity</h4>
+                                        <span
+                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Visual systems that capture your essence and
+                                        communicate your value proposition with impact.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'design')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">UI/UX
+                                            Design</h4>
+                                        <span
+                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">User-centered design creating intuitive, accessible
+                                        interfaces backed by research and testing.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'motion')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
+                                            Photography & Videography</h4>
+                                        <span
+                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Professional visual storytelling through
+                                        high-quality commercial photography and video production.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'graphic')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#9b59b6] transition-colors">
+                                            Visual Design</h4>
+                                        <span
+                                            class="text-[#9b59b6] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Premium graphics and artistic visuals across all
+                                        physical and digital brand touchpoints.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Category Card -->
+                    <div class="flex flex-col gap-6 section-hidden" style="transition-delay: 0.3s">
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-[#00b894]">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div
+                                    class="w-12 h-12 bg-[#00b894]/20 rounded-xl flex items-center justify-center border border-[#00b894]/30">
+                                    <svg class="w-6 h-6 text-[#00b894]" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-3xl font-bold text-white tracking-tight">Marketing</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'social')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                            Social Media Marketing</h4>
+                                        <span
+                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Strategic social media management and campaigns to
+                                        build your community and brand presence.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'content')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">
+                                            Content Creation</h4>
+                                        <span
+                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">High-engagement content designed to tell your story
+                                        and resonate with your target audience.</p>
+                                </div>
+                                <div class="service-card p-5 rounded-xl cursor-pointer group"
+                                    onclick="router.navigate('service-detail', 'seo')">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-lg font-bold group-hover:text-[#00b894] transition-colors">SEO &
+                                            Analytics</h4>
+                                        <span
+                                            class="text-[#00b894] transform group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm">Technical SEO and analytics to dominate search
+                                        results and track user behavior.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center md:hidden relative z-10">
+                    <button class="btn-secondary" onclick="router.navigate('services')">Explore All Services →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Preview -->
+        <section class="py-32 relative" id="portfolio-section">
+            <div class="canvas-container" id="portfolio-canvas-container"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="flex justify-between items-end mb-16 section-hidden">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">Featured <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#9b59b6] to-[#00b894]">Work</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg">Results that speak for themselves.</p>
+                    </div>
+                    <button class="btn-secondary hidden md:block" onclick="router.navigate('portfolio')">View Full Case
+                        Studies →</button>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                    <!-- Case Study 1 -->
+                    <div class="portfolio-card group cursor-pointer section-hidden"
+                        onclick="router.navigate('case-study', 'ecommerce')">
+                        <div class="aspect-[4/5] bg-gray-800 relative overflow-hidden rounded-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-6xl font-bold text-white/10">EC</div>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                                <div
+                                    class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div class="text-[#00b894] text-sm font-medium mb-2">E-Commerce</div>
+                                    <h3 class="text-2xl font-bold mb-2">Luxury Retail Platform</h3>
+                                    <div class="flex items-center gap-2 text-3xl font-bold text-white">
+                                        <span class="text-[#00b894]">+180%</span>
+                                        <span class="text-lg font-normal text-gray-300">Revenue Growth</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 2 -->
+                    <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: 0.1s"
+                        onclick="router.navigate('case-study', 'fintech')">
+                        <div class="aspect-[4/5] bg-gray-800 relative overflow-hidden rounded-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#9b59b6]/20 to-blue-600/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-6xl font-bold text-white/10">FN</div>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                                <div
+                                    class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div class="text-[#9b59b6] text-sm font-medium mb-2">FinTech</div>
+                                    <h3 class="text-2xl font-bold mb-2">Banking App Redesign</h3>
+                                    <div class="flex items-center gap-2 text-3xl font-bold text-white">
+                                        <span class="text-[#9b59b6]">2M+</span>
+                                        <span class="text-lg font-normal text-gray-300">New Users</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 3 -->
+                    <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: 0.2s"
+                        onclick="router.navigate('case-study', 'healthcare')">
+                        <div class="aspect-[4/5] bg-gray-800 relative overflow-hidden rounded-lg">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#00b894]/20 to-teal-600/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-6xl font-bold text-white/10">HC</div>
+                            </div>
+                            <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-8">
+                                <div
+                                    class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div class="text-[#00b894] text-sm font-medium mb-2">Healthcare</div>
+                                    <h3 class="text-2xl font-bold mb-2">Telemedicine Platform</h3>
+                                    <div class="flex items-center gap-2 text-3xl font-bold text-white">
+                                        <span class="text-[#00b894]">-40%</span>
+                                        <span class="text-lg font-normal text-gray-300">Operational Costs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center md:hidden relative z-10">
+                    <button class="btn-secondary" onclick="router.navigate('portfolio')">View Full Case Studies
+                        →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How We Work Section -->
+        <section class="py-32 relative overflow-hidden" id="process-section">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#00b894]/5 to-transparent"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-24 section-hidden">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">How We <span class="text-[#00b894]">Work</span></h2>
+                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">A streamlined architecture for digital success,
+                        from the first node of an idea to its mass-scale evolution.</p>
+                </div>
+
+                <div class="relative">
+                    <!-- Progress Line (Animated) -->
+                    <div class="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-[#00b894] via-[#9b59b6] to-[#00b894] opacity-20 hidden md:block"
+                        style="transform: translateX(-50%)"></div>
+
+                    <div class="space-y-24">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden">
+                            <div class="flex-1 md:text-right">
+                                <h3 class="text-2xl font-bold text-white mb-3">01. Discovery & Strategy</h3>
+                                <p class="text-gray-400">We analyze your market landscape, identify technical
+                                    bottlenecks, and define a roadmap that aligns with your core business velocity.</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 bg-[#00b894] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#00b894/30]">
+                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1 hidden md:block"></div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden"
+                            style="transition-delay: 0.1s">
+                            <div class="flex-1 hidden md:block"></div>
+                            <div
+                                class="w-12 h-12 bg-[#9b59b6] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#9b59b6/30]">
+                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-3">02. Design & Architecture</h3>
+                                <p class="text-gray-400">Our architects create robust visual systems and scalable
+                                    technical foundations designed to handle exponential growth without compromise.</p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden"
+                            style="transition-delay: 0.2s">
+                            <div class="flex-1 md:text-right">
+                                <h3 class="text-2xl font-bold text-white mb-3">03. Engineering & Craft</h3>
+                                <p class="text-gray-400">We breathe life into the architecture using modern tech stacks.
+                                    Iterative builds and obsessive testing ensure a flawless digital fingerprint.</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 bg-[#00b894] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#00b894/30]">
+                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1 hidden md:block"></div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flex flex-col md:flex-row items-center gap-12 section-hidden"
+                            style="transition-delay: 0.3s">
+                            <div class="flex-1 hidden md:block"></div>
+                            <div
+                                class="w-12 h-12 bg-[#9b59b6] rounded-full flex items-center justify-center relative z-10 border-4 border-[#050508] shadow-[0_0_20px_#9b59b6/30]">
+                                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-3">04. Launch & Optimization</h3>
+                                <p class="text-gray-400">Post-deployment, we monitor performance nodes in real-time to
+                                    optimize conversions and ensure your digital engine stays ahead of the curve.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Meeting CTA -->
+        <section class="py-32 relative overflow-hidden" id="contact">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#00b894]/10 via-[#9b59b6]/10 to-[#00b894]/10"></div>
+
+            <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+                <div
+                    class="calendar-icon w-20 h-20 mx-auto mb-8 bg-gradient-to-br from-[#00b894] to-[#9b59b6] rounded-2xl flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform cursor-pointer">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </div>
+
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 section-hidden">Ready to Build the <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[#00b894] to-[#9b59b6]">Future</span>?
+                </h2>
+                <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto section-hidden">Let's discuss how we can
+                    transform your digital presence and accelerate your growth trajectory.</p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 section-hidden">
+                    <div class="flex items-center gap-2 text-gray-300">
+                        <div class="w-2 h-2 bg-[#00b894] rounded-full"></div>
+                        <span>Free 30-min consultation</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-300">
+                        <div class="w-2 h-2 bg-[#9b59b6] rounded-full"></div>
+                        <span>Custom strategy blueprint</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-300">
+                        <div class="w-2 h-2 bg-[#00b894] rounded-full"></div>
+                        <span>No commitment required</span>
+                    </div>
+                </div>
+
+                <button class="btn-primary text-xl px-12 py-4 section-hidden glow-purple" onclick="openCalendar()">
+                    Schedule Your Strategy Call
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/5 py-12 bg-black/50">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 overflow-hidden rounded-lg">
+                        <img src="logo.jpeg" alt="BIZAFAH Logo" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-xl font-black tracking-tighter text-white uppercase">BIZAFAH</span>
+                </div>
+                <div class="text-gray-500 text-sm">
+                    © 2026 Bizafah Digital. All rights reserved.
+                </div>
+                <div class="flex gap-6">
+                    <a href="https://www.instagram.com/bizafah/?hl=en" target="_blank"
+                        class="text-gray-400 hover:text-[#E4405F] transition text-xl"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-[#0A66C2] transition text-xl"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-[#1877F2] transition text-xl"><i
+                            class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="page-services" class="page">
+        <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+            <div class="text-center mb-20 section-hidden">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">Our <span class="text-[#00b894]">Services</span></h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Comprehensive digital solutions tailored to
+                    accelerate your business growth and technological capabilities.</p>
+            </div>
+
+            <!-- Growth Category -->
+            <div class="mb-20 section-hidden">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#00b894]/50 to-transparent"></div>
+                    <h2 class="text-3xl font-bold text-[#00b894]">Growth</h2>
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#00b894]/50 to-transparent"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">Digital Strategy</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">We analyze your market position, competitive
+                            landscape, and technological infrastructure to create a comprehensive roadmap. Our
+                            strategies align business objectives with digital capabilities, ensuring every initiative
+                            drives measurable ROI.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#00b894]">→</span> Market Analysis & Positioning
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#00b894]">→</span> Technology Stack Consulting
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#00b894]">→</span> Growth Roadmap Development
+                            </div>
+                        </div>
+                        <button class="btn-secondary w-full"
+                            onclick="router.navigate('service-detail', 'strategy')">Learn More</button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">Growth Marketing</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Data-driven acquisition and retention strategies
+                            that scale. We combine performance marketing, SEO, content strategy, and marketing
+                            automation to create sustainable growth engines for your business.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#00b894]">→</span> Performance Marketing
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#00b894]">→</span> SEO & Content Strategy
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#00b894]">→</span> Marketing Automation
+                            </div>
+                        </div>
+                        <button class="btn-secondary w-full"
+                            onclick="router.navigate('service-detail', 'marketing')">Learn More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creative Category -->
+            <div class="mb-20 section-hidden">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#9b59b6]/50 to-transparent"></div>
+                    <h2 class="text-3xl font-bold text-[#9b59b6]">Creative</h2>
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#9b59b6]/50 to-transparent"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">Brand Identity</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Visual systems that communicate your unique value
+                            proposition. From logo design to comprehensive brand guidelines, we create identities that
+                            resonate with your target audience and stand the test of time.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#9b59b6]">→</span> Visual Identity Design
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#9b59b6]">→</span> Brand Guidelines
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#9b59b6]">→</span> Brand Strategy
+                            </div>
+                        </div>
+                        <button class="btn-secondary w-full"
+                            onclick="router.navigate('service-detail', 'branding')">Learn More</button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">User-centered design processes that create
+                            intuitive, accessible, and beautiful interfaces. We focus on research-backed designs that
+                            delight users and drive meaningful business conversions.</p>
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#9b59b6]">→</span> User Research
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#9b59b6]">→</span> Interface Design
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <span class="text-[#9b59b6]">→</span> Prototyping & Testing
+                            </div>
+                        </div>
+                        <button class="btn-secondary w-full" onclick="router.navigate('service-detail', 'design')">Learn
+                            More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Category -->
+            <div class="mb-20 section-hidden">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#00b894]/50 to-transparent"></div>
+                    <h2 class="text-3xl font-bold text-[#00b894]">Development</h2>
+                    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-[#00b894]/50 to-transparent"></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+                        <p class="text-gray-400 mb-6">High-performance websites and web applications built with modern
+                            technologies. Scalable, secure, and optimized for conversion.</p>
+                        <button class="btn-secondary w-full" onclick="router.navigate('service-detail', 'web')">Learn
+                            More</button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">Data Analytics</h3>
+                        <p class="text-gray-400 mb-6">Unlock the power of your data with advanced visualization,
+                            predictive modeling, and actionable business intelligence solutions.</p>
+                        <button class="btn-secondary w-full"
+                            onclick="router.navigate('service-detail', 'analytics')">Learn
+                            More</button>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4">AI Automation</h3>
+                        <p class="text-gray-400 mb-6">Machine learning solutions and intelligent automation that
+                            transform operations and create competitive advantages.</p>
+                        <button class="btn-secondary w-full" onclick="router.navigate('service-detail', 'ai')">Learn
+                            More</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    `).join('');
-
-    setTimeout(observeSections, 100);
-}
-
-// Filter functionality
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('filter-btn')) {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active', 'bg-[#00b894]/10', 'text-[#00b894]', 'border-[#00b894]');
-            btn.classList.add('border-white/10');
-        });
-        e.target.classList.add('active', 'bg-[#00b894]/10', 'text-[#00b894]', 'border-[#00b894]');
-        e.target.classList.remove('border-white/10');
-
-        const filter = e.target.dataset.filter;
-        document.querySelectorAll('#portfolio-grid > div').forEach(card => {
-            if (filter === 'all' || card.dataset.category === filter) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-});
-
-// Hero Section: Neural Network Particles
-function initHeroParticles() {
-    const container = document.getElementById('hero-canvas-container');
-    if (!container) return;
-
-    let scene, camera, renderer, particles, lines;
-    const particleCount = 250;
-    const maxDistance = 150;
-    const particlesData = [];
-
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 450;
-
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    container.appendChild(renderer.domElement);
-
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount; i++) {
-        const x = Math.random() * 900 - 450;
-        const y = Math.random() * 900 - 450;
-        const z = Math.random() * 800 - 400;
-
-        positions[i * 3] = x;
-        positions[i * 3 + 1] = y;
-        positions[i * 3 + 2] = z;
-
-        particlesData.push({
-            velocity: new THREE.Vector3(-0.8 + Math.random() * 1.6, -0.8 + Math.random() * 1.6, -0.8 + Math.random() * 1.6),
-            numConnections: 0
-        });
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3).setUsage(THREE.DynamicDrawUsage));
-
-    const sprite = new THREE.Texture(generateRoundTexture());
-    sprite.needsUpdate = true;
-
-    const pMaterial = new THREE.PointsMaterial({
-        color: 0xffffff,
-        size: 8,
-        map: sprite,
-        blending: THREE.AdditiveBlending,
-        transparent: true,
-        opacity: 0.8,
-        sizeAttenuation: true,
-        depthWrite: false
-    });
-
-    particles = new THREE.Points(geometry, pMaterial);
-    scene.add(particles);
-
-    const lineGeometry = new THREE.BufferGeometry();
-    const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0x0ff4d0,
-        transparent: true,
-        opacity: 0.35,
-        blending: THREE.AdditiveBlending
-    });
-
-    lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-    scene.add(lines);
-
-    function generateRoundTexture() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 16;
-        canvas.height = 16;
-        const context = canvas.getContext('2d');
-        const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
-        gradient.addColorStop(0, 'rgba(255,255,255,1)');
-        gradient.addColorStop(0.3, 'rgba(255,255,255,1)');
-        gradient.addColorStop(0.5, 'rgba(255,255,255,0.4)');
-        gradient.addColorStop(1, 'rgba(255,255,255,0)');
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, 16, 16);
-        return canvas;
-    }
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        const positions = particles.geometry.attributes.position.array;
-        const linePositions = new Float32Array(particleCount * 60);
-        let lineCount = 0;
-
-        for (let i = 0; i < particleCount; i++) {
-            const particleData = particlesData[i];
-
-            positions[i * 3] += particleData.velocity.x * 0.6;
-            positions[i * 3 + 1] += particleData.velocity.y * 0.6;
-            positions[i * 3 + 2] += particleData.velocity.z * 0.6;
-
-            if (positions[i * 3 + 1] < -450 || positions[i * 3 + 1] > 450) particleData.velocity.y *= -1;
-            if (positions[i * 3] < -450 || positions[i * 3] > 450) particleData.velocity.x *= -1;
-            if (positions[i * 3 + 2] < -400 || positions[i * 3 + 2] > 400) particleData.velocity.z *= -1;
-
-            for (let j = i + 1; j < particleCount; j++) {
-                const dx = positions[i * 3] - positions[j * 3];
-                const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
-                const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                if (dist < maxDistance) {
-                    linePositions[lineCount++] = positions[i * 3];
-                    linePositions[lineCount++] = positions[i * 3 + 1];
-                    linePositions[lineCount++] = positions[i * 3 + 2];
-
-                    linePositions[lineCount++] = positions[j * 3];
-                    linePositions[lineCount++] = positions[j * 3 + 1];
-                    linePositions[lineCount++] = positions[j * 3 + 2];
-                }
-            }
-        }
-
-        lines.geometry.setAttribute('position', new THREE.BufferAttribute(linePositions.slice(0, lineCount), 3));
-        particles.geometry.attributes.position.needsUpdate = true;
-
-        particles.rotation.y += 0.0012;
-        lines.rotation.y += 0.0012;
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-}
-
-// About: Floating Geometric Shapes
-function initAboutShapes() {
-    const container = document.getElementById('about-canvas-container');
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-
-    const shapes = [];
-    const geometries = [
-        new THREE.IcosahedronGeometry(0.5, 0),
-        new THREE.OctahedronGeometry(0.5, 0),
-        new THREE.TetrahedronGeometry(0.6, 0),
-        new THREE.TorusGeometry(0.4, 0.15, 16, 100)
-    ];
-
-    const aquaMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00b894,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.3
-    });
-
-    const purpleMaterial = new THREE.MeshBasicMaterial({
-        color: 0x9b59b6,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.2
-    });
-
-    // Create floating shapes
-    for (let i = 0; i < 15; i++) {
-        const geometry = geometries[Math.floor(Math.random() * geometries.length)];
-        const material = Math.random() > 0.6 ? purpleMaterial : aquaMaterial;
-        const shape = new THREE.Mesh(geometry, material);
-
-        shape.position.set(
-            (Math.random() - 0.5) * 15,
-            (Math.random() - 0.5) * 15,
-            (Math.random() - 0.5) * 5 - 5
-        );
-
-        shape.userData = {
-            rotationSpeed: {
-                x: (Math.random() - 0.5) * 0.02,
-                y: (Math.random() - 0.5) * 0.02,
-                z: (Math.random() - 0.5) * 0.01
-            },
-            floatSpeed: Math.random() * 0.005 + 0.002,
-            floatOffset: Math.random() * Math.PI * 2
-        };
-
-        scene.add(shape);
-        shapes.push(shape);
-    }
-
-    camera.position.z = 10;
-
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.01;
-
-        shapes.forEach((shape, i) => {
-            shape.rotation.x += shape.userData.rotationSpeed.x;
-            shape.rotation.y += shape.userData.rotationSpeed.y;
-            shape.rotation.z += shape.userData.rotationSpeed.z;
-
-            shape.position.y += Math.sin(time + shape.userData.floatOffset) * 0.01;
-
-            const scale = 1 + Math.sin(time * 2 + i) * 0.1;
-            shape.scale.setScalar(scale);
-        });
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-}
-
-// WHY CHOOSE US: DNA Helix
-function initDNAHelix() {
-    const container = document.getElementById('why-canvas-container');
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-
-    const particles = [];
-    const particleCount = 100;
-    const helixRadius = 3;
-    const helixHeight = 20;
-    const turns = 3;
-
-    const aquaMaterial = new THREE.MeshBasicMaterial({ color: 0x00b894 });
-    const purpleMaterial = new THREE.MeshBasicMaterial({ color: 0x9b59b6 });
-    const geometry = new THREE.SphereGeometry(0.08, 8, 8);
-
-    // Create double helix
-    for (let i = 0; i < particleCount; i++) {
-        const t = (i / particleCount) * Math.PI * 2 * turns;
-        const y = (i / particleCount) * helixHeight - helixHeight / 2;
-
-        // First strand
-        const particle1 = new THREE.Mesh(geometry, aquaMaterial);
-        particle1.position.set(
-            Math.cos(t) * helixRadius,
-            y,
-            Math.sin(t) * helixRadius
-        );
-        scene.add(particle1);
-        particles.push({ mesh: particle1, t: t, strand: 0, baseY: y });
-
-        // Second strand (offset by PI)
-        const particle2 = new THREE.Mesh(geometry, purpleMaterial);
-        particle2.position.set(
-            Math.cos(t + Math.PI) * helixRadius,
-            y,
-            Math.sin(t + Math.PI) * helixRadius
-        );
-        scene.add(particle2);
-        particles.push({ mesh: particle2, t: t + Math.PI, strand: 1, baseY: y });
-
-        // Connection lines between strands
-        if (i % 3 === 0) {
-            const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-                particle1.position,
-                particle2.position
-            ]);
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0xffffff,
-                transparent: true,
-                opacity: 0.1
-            });
-            const line = new THREE.Line(lineGeometry, lineMaterial);
-            scene.add(line);
-            particles.push({ line: line, t: t, baseY: y });
-        }
-    }
-
-    camera.position.z = 15;
-    camera.position.y = 0;
-
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.005;
-
-        particles.forEach(p => {
-            if (p.mesh) {
-                const newT = p.t + time;
-                p.mesh.position.x = Math.cos(newT) * helixRadius;
-                p.mesh.position.z = Math.sin(newT) * helixRadius;
-
-                p.mesh.position.y = p.baseY + Math.sin(time * 2 + p.t) * 0.5;
-            }
-            if (p.line) {
-                const positions = p.line.geometry.attributes.position.array;
-                const newT = p.t + time;
-
-                positions[0] = Math.cos(newT) * helixRadius;
-                positions[1] = p.baseY + Math.sin(time * 2 + p.t) * 0.5;
-                positions[2] = Math.sin(newT) * helixRadius;
-
-                positions[3] = Math.cos(newT + Math.PI) * helixRadius;
-                positions[4] = p.baseY + Math.sin(time * 2 + p.t) * 0.5;
-                positions[5] = Math.sin(newT + Math.PI) * helixRadius;
-
-                p.line.geometry.attributes.position.needsUpdate = true;
-            }
-        });
-
-        scene.rotation.y = Math.sin(time * 0.5) * 0.2;
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-}
-
-// SERVICES: Flowing Data Stream
-function initServicesStream() {
-    const container = document.getElementById('services-canvas-container');
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-
-    const streams = [];
-    const streamCount = 8;
-
-    const aquaMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00b894,
-        transparent: true,
-        opacity: 0.6
-    });
-
-    const purpleMaterial = new THREE.MeshBasicMaterial({
-        color: 0x9b59b6,
-        transparent: true,
-        opacity: 0.4
-    });
-
-    // Create flowing particles
-    for (let i = 0; i < streamCount; i++) {
-        const particleCount = 30;
-        const particles = [];
-
-        for (let j = 0; j < particleCount; j++) {
-            const geometry = new THREE.SphereGeometry(0.05 + Math.random() * 0.05, 8, 8);
-            const material = Math.random() > 0.5 ? aquaMaterial : purpleMaterial;
-            const particle = new THREE.Mesh(geometry, material);
-
-            const x = (i - streamCount / 2) * 2 + (Math.random() - 0.5);
-            const y = (j / particleCount) * 20 - 10;
-
-            particle.position.set(x, y, (Math.random() - 0.5) * 5);
-            particle.userData = {
-                speed: 0.02 + Math.random() * 0.03,
-                wobble: Math.random() * Math.PI * 2,
-                wobbleSpeed: 0.02 + Math.random() * 0.02
-            };
-
-            scene.add(particle);
-            particles.push(particle);
-        }
-
-        streams.push(particles);
-    }
-
-    camera.position.z = 12;
-
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.01;
-
-        streams.forEach((stream, streamIdx) => {
-            stream.forEach((particle, i) => {
-                particle.position.y += particle.userData.speed;
-
-                if (particle.position.y > 10) {
-                    particle.position.y = -10;
-                }
-
-                particle.position.x += Math.sin(time * particle.userData.wobbleSpeed + particle.userData.wobble) * 0.01;
-
-                const scale = 1 + Math.sin(time * 3 + i * 0.2) * 0.3;
-                particle.scale.setScalar(scale);
-            });
-        });
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-}
-
-// PORTFOLIO: Constellation Network
-function initPortfolioConstellation() {
-    const container = document.getElementById('portfolio-canvas-container');
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-
-    const stars = [];
-    const starCount = 60;
-    const connections = [];
-
-    // Create stars
-    for (let i = 0; i < starCount; i++) {
-        const geometry = new THREE.SphereGeometry(0.1, 8, 8);
-        const material = new THREE.MeshBasicMaterial({
-            color: Math.random() > 0.7 ? 0x9b59b6 : 0x00b894,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        const star = new THREE.Mesh(geometry, material);
-        star.position.set(
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 15,
-            (Math.random() - 0.5) * 5
-        );
-
-        star.userData = {
-            pulseSpeed: 0.5 + Math.random(),
-            baseOpacity: 0.4 + Math.random() * 0.4,
-            twinkleOffset: Math.random() * Math.PI * 2
-        };
-
-        scene.add(star);
-        stars.push(star);
-    }
-
-    camera.position.z = 12;
-
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.01;
-
-        // Clear old connections
-        connections.forEach(line => scene.remove(line));
-        connections.length = 0;
-
-        // Update stars and create connections
-        stars.forEach((star, i) => {
-            // Twinkle effect
-            const opacity = star.userData.baseOpacity +
-                Math.sin(time * star.userData.pulseSpeed + star.userData.twinkleOffset) * 0.3;
-            star.material.opacity = Math.max(0.2, opacity);
-
-            // Gentle drift
-            star.position.y += Math.sin(time * 0.5 + i) * 0.002;
-
-            // Connect nearby stars
-            let connectionCount = 0;
-            for (let j = i + 1; j < stars.length && connectionCount < 3; j++) {
-                const dist = star.position.distanceTo(stars[j].position);
-
-                if (dist < 4) {
-                    const geometry = new THREE.BufferGeometry().setFromPoints([
-                        star.position,
-                        stars[j].position
-                    ]);
-                    const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
-                        color: 0x00b894,
-                        transparent: true,
-                        opacity: (1 - dist / 4) * 0.15
-                    }));
-                    scene.add(line);
-                    connections.push(line);
-                    connectionCount++;
-                }
-            }
-        });
-
-        // Slow rotation
-        scene.rotation.z = Math.sin(time * 0.1) * 0.05;
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-}
-
-// Intersection Observer
-function observeSections() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('section-visible');
-                entry.target.classList.remove('section-hidden');
-
-                if (entry.target.querySelector('.stat-number')) {
-                    animateStats(entry.target);
-                }
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.section-hidden').forEach(section => {
-        observer.observe(section);
-    });
-}
-
-function animateStats(container) {
-    container.querySelectorAll('.stat-number').forEach(stat => {
-        const target = parseInt(stat.dataset.target);
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                stat.textContent = target + (stat.dataset.suffix || '+');
-                clearInterval(timer);
-            } else {
-                stat.textContent = Math.floor(current);
-            }
-        }, 16);
-    });
-}
-
-// Mobile menu toggle
-function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-    menu.classList.toggle('flex');
-}
-
-function scrollToContact() {
-    window.open('https://wa.me/923338010986', '_blank');
-}
-
-function openCalendar() {
-    window.open('https://wa.me/923338010986', '_blank');
-}
-
-// Initialize everything
-document.addEventListener('DOMContentLoaded', () => {
-    initHeroParticles();
-    initAboutShapes();
-    initDNAHelix();
-    initServicesStream();
-    initPortfolioConstellation();
-    observeSections();
-});
+    </div>
+
+    <!-- SERVICE DETAIL PAGE -->
+    <div id="page-service-detail" class="page">
+        <div class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
+            <button onclick="router.back()"
+                class="mb-8 text-gray-400 hover:text-[#00b894] flex items-center gap-2 transition">
+                ← Back to Services
+            </button>
+
+            <div id="service-content" class="section-hidden">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTFOLIO PAGE -->
+    <div id="page-portfolio" class="page">
+        <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-hidden">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">Case <span class="text-[#9b59b6]">Studies</span></h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Real results for real businesses. Explore how we've
+                    helped organizations transform their digital presence.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex justify-center gap-4 mb-12 flex-wrap section-hidden">
+                <button
+                    class="filter-btn active px-6 py-2 rounded-full border border-[#00b894] bg-[#00b894]/10 text-[#00b894] transition"
+                    data-filter="all">All</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="ecommerce">E-Commerce</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="fintech">FinTech</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="healthcare">Healthcare</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="saas">SaaS</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                <!-- Portfolio items will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CASE STUDY PAGE -->
+    <div id="page-case-study" class="page">
+        <div class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
+            <button onclick="router.back()"
+                class="mb-8 text-gray-400 hover:text-[#00b894] flex items-center gap-2 transition">
+                ← Back to Portfolio
+            </button>
+
+            <div id="case-study-content" class="section-hidden">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="page-about" class="page">
+        <div class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
+            <div class="text-center mb-20 section-hidden">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">About <span class="text-[#00b894]">Bizafah</span></h1>
+                <p class="text-xl text-gray-400">Crafting the future, one pixel at a time.</p>
+            </div>
+
+            <div class="prose prose-invert prose-lg max-w-none section-hidden">
+                <p class="text-xl leading-relaxed text-gray-300 mb-8">
+                    Founded in 2020, Bizafah emerged from a simple belief: that technology should elevate human
+                    potential, not complicate it. What started as a small collective of designers and engineers has
+                    evolved into a global digital innovation hub, serving ambitious startups and Fortune 500 enterprises
+                    alike.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-12 my-16">
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4 text-[#00b894]">Our Mission</h3>
+                        <p class="text-gray-400">To democratize access to world-class digital capabilities, enabling
+                            organizations of all sizes to compete and win in the digital economy.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-4 text-[#9b59b6]">Our Vision</h3>
+                        <p class="text-gray-400">A world where technology seamlessly integrates with human creativity,
+                            amplifying our capacity to solve complex problems and create meaningful experiences.</p>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl font-bold mb-6">Our Values</h2>
+                <div class="space-y-6 mb-16">
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-[#00b894]/10 flex items-center justify-center flex-shrink-0 border border-[#00b894]/30">
+                            <span class="text-[#00b894] font-bold">01</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Excellence in Everything</h4>
+                            <p class="text-gray-400">We refuse to compromise on quality. Every project receives the same
+                                level of care and attention to detail, regardless of size.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-[#9b59b6]/10 flex items-center justify-center flex-shrink-0 border border-[#9b59b6]/30">
+                            <span class="text-[#9b59b6] font-bold">02</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Radical Transparency</h4>
+                            <p class="text-gray-400">No hidden fees, no surprise delays. We believe in open
+                                communication and honest partnership.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-[#00b894]/10 flex items-center justify-center flex-shrink-0 border border-[#00b894]/30">
+                            <span class="text-[#00b894] font-bold">03</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Continuous Innovation</h4>
+                            <p class="text-gray-400">We stay ahead of the curve so our clients don't have to. Constant
+                                learning and adaptation are in our DNA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
