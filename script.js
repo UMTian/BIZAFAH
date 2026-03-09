@@ -403,61 +403,170 @@ const serviceData = {
 
 // Case Study Data (YOUR ORIGINAL DATA - UNCHANGED)
 const caseStudyData = {
-    ecommerce: {
-        title: "Luxury E-Commerce Platform",
-        client: "Prestige Retail Group",
-        category: "E-Commerce",
-        overview: "A complete digital transformation for a luxury retailer seeking to modernize their online presence and capture the growing high-end digital market.",
-        problem: "Legacy platform with 8+ second load times, 2% conversion rate, and inability to handle flash sale traffic. Brand perception was suffering due to poor digital experience.",
-        strategy: "Headless commerce architecture with React frontend, AI-powered personalization, and mobile-first luxury experience design.",
-        execution: "6-month phased rollout including platform migration, custom AR try-on features, and VIP customer portal.",
+    'pizza-shop': {
+        title: "Pizza Shop Website Building Solution",
+        client: "Slice Masters",
+        category: "Web Development",
+        overview: "A modern, high-converting digital storefront and ordering system designed to dramatically increase online sales for a busy pizza shop.",
+        problem: "The shop relied entirely on third-party delivery apps that took 30% cuts. Their existing website was non-responsive and lacked online ordering capabilities, leading to lost direct sales.",
+        strategy: "We built a custom, mobile-first web application featuring a friction-free ordering process, mouth-watering visual menus, and seamless integration with their point-of-sale system.",
+        execution: "4-week rapid development cycle including UX design, custom photography, secure payment gateway integration, and staff training on the new digital order flow.",
         results: [
-            { label: "Revenue Growth", value: "180%" },
-            { label: "Conversion Rate", value: "4.5%" },
-            { label: "Page Load Time", value: "0.8s" },
-            { label: "Mobile Revenue", value: "240%" }
+            { label: "Online Orders", value: "+300%" },
+            { label: "Third-party Fees Saved", value: "$45k/yr" },
+            { label: "Mobile Conversion", value: "8.5%" },
+            { label: "Average Order Value", value: "+22%" }
         ]
     },
-    fintech: {
-        title: "Neobank App Redesign",
-        client: "Future Finance",
-        category: "FinTech",
-        overview: "Complete UX overhaul of a digital banking application to improve user engagement and compete with established fintech players.",
-        problem: "Complex navigation causing 60% drop-off during onboarding. Users complained about 'too many steps' to complete basic transactions.",
-        strategy: "Simplified information architecture, biometric authentication, and predictive transaction features powered by ML.",
-        execution: "3-month design sprint followed by gradual feature rollout with extensive A/B testing.",
+    'voice-agent': {
+        title: "Voice Calling Agent Project",
+        client: "Global Logistics Co.",
+        category: "AI Automation",
+        overview: "Implementation of an advanced conversational AI voice agent to handle high-volume customer inquiries, dispatch routing, and automated follow-ups.",
+        problem: "Customer service agents were overwhelmed with repetitive 'Where is my order?' queries, leading to long hold times (avg 15 mins) and plummeting customer satisfaction scores.",
+        strategy: "Deploy a natural language processing voice agent capable of understanding multiple accents, querying the logistics database in real-time, and seamlessly escalating complex issues to human agents.",
+        execution: "3-month implementation including dialogue mapping, API integrations with tracking systems, voice synthesis tuning, and rigorous edge-case testing.",
         results: [
-            { label: "User Acquisition", value: "2M" },
-            { label: "Onboarding Completion", value: "85%" },
-            { label: "Daily Active Users", value: "150%" },
-            { label: "App Store Rating", value: "4.9★" }
+            { label: "Availability", value: "24/7" },
+            { label: "Calls Handled", value: "10k+/day" },
+            { label: "Hold Time", value: "< 5 secs" },
+            { label: "Deflection Rate", value: "75%" }
         ]
     },
-    healthcare: {
-        title: "Telemedicine Platform",
-        client: "MedConnect Health",
-        category: "Healthcare",
-        overview: "End-to-end telehealth solution enabling remote consultations, prescription management, and patient monitoring.",
-        problem: "Inefficient manual scheduling, no-show rates of 30%, and provider burnout from administrative tasks.",
-        strategy: "AI-powered triage, automated scheduling, integrated EHR, and remote monitoring devices.",
-        execution: "12-month development with strict HIPAA compliance, security audits, and provider training programs.",
+    'furniture-analysis': {
+        title: "Stock and Sales Analysis for Furniture",
+        client: "Urban Home Design",
+        category: "Data Analytics",
+        overview: "A comprehensive data warehousing and visualization project designed to give a national furniture retailer real-time visibility into their inventory and sales performance.",
+        problem: "Data was locked in siloed legacy systems. It took the operations team two weeks to generate sales reports, leading to frequent stockouts of popular items and overstock of slow movers.",
+        strategy: "Build an automated ETL pipeline feeding into a centralized data warehouse, layered with interactive PowerBI dashboards for regional managers and executive leadership.",
+        execution: "8-week data engineering sprint to connect POS, ERP, and e-commerce platforms, followed by 4 weeks of dashboard design and user adoption workshops.",
         results: [
-            { label: "Cost Reduction", value: "-40%" },
-            { label: "Patient Satisfaction", value: "4.8/5" },
-            { label: "No-Show Rate", value: "5%" },
-            { label: "Provider Efficiency", value: "60%" }
+            { label: "Reporting Speed", value: "Real-time" },
+            { label: "Inventory Costs", value: "-18%" },
+            { label: "Stockouts", value: "Down 85%" },
+            { label: "Sales Margin", value: "+4.2%" }
+        ]
+    },
+    'perfume-social': {
+        title: "Perfume Brand Social Campaign",
+        client: "Aura Fragrances",
+        category: "Social Media",
+        overview: "A comprehensive social media overhaul and influencer marketing campaign designed to launch a new line of premium fragrances to a younger demographic.",
+        problem: "The brand had a legacy image and was struggling to connect with Gen Z and millennial consumers on platforms like TikTok and Instagram. Engagement rates were below 0.5%.",
+        strategy: "We developed a visually striking, aesthetic-first content strategy paired with micro-influencer partnerships to create authentic, user-generated-style content.",
+        execution: "3-month campaign involving 50+ creators, custom AR unboxing filters, and daily short-form video content highlighting the sensory experience of the scents.",
+        results: [
+            { label: "Engagement Rate", value: "6.8%" },
+            { label: "Follower Growth", value: "+150k" },
+            { label: "Direct Sales", value: "$400k+" },
+            { label: "Impressions", value: "12M+" }
+        ]
+    },
+    'machine-analytics': {
+        title: "Industrial Machine IoT Analytics",
+        client: "Apex Manufacturing",
+        category: "Data Analytics",
+        overview: "Implementation of an IoT data pipeline and predictive maintenance dashboard for a large-scale manufacturing plant.",
+        problem: "Unexpected machine breakdowns were causing millions of dollars in lost production time. Maintenance was purely reactive or based on outdated manual schedules.",
+        strategy: "We connected existing machine sensors to a cloud data lake and built machine learning models to detect anomalies and predict component failures before they occurred.",
+        execution: "6-month project involving edge computing setup, cloud infrastructure deployment, and custom dashboard development for the floor supervisors.",
+        results: [
+            { label: "Downtime Reduced", value: "65%" },
+            { label: "Maintenance Costs", value: "-30%" },
+            { label: "Production Output", value: "+12%" },
+            { label: "ROI Timeframe", value: "4 Months" }
+        ]
+    },
+    'mining-analytics': {
+        title: "Global Supply Chain Mining Analytics",
+        client: "Terra Resources",
+        category: "Data Analytics",
+        overview: "A complex data visualization platform merging geological data, supply chain logistics, and market pricing to optimize mineral extraction and shipping.",
+        problem: "Data was fragmented across dozens of separate systems worldwide, making it impossible for executives to make timely decisions on production volume vs market demand.",
+        strategy: "Created an enterprise-wide single source of truth, utilizing advanced geospatial analytics and predictive pricing models.",
+        execution: "12-month enterprise deployment, integrating with Oracle ERP, custom geological software, and global shipping APIs.",
+        results: [
+            { label: "Logistics Optimization", value: "$12M Saved" },
+            { label: "Decision Speed", value: "10x Faster" },
+            { label: "Yield Accuracy", value: "99.2%" },
+            { label: "Market Adaptability", value: "+20%" }
+        ]
+    },
+    'shoes-web': {
+        title: "Custom Footwear Web Platform",
+        client: "Sole Craft",
+        category: "Web Development",
+        overview: "A highly interactive e-commerce platform featuring a custom 3D shoe configurator, allowing users to design and order bespoke sneakers.",
+        problem: "The client was relying on offline custom orders, which severely limited scalability. They needed a web platform that replicated the premium, personalized in-store design experience.",
+        strategy: "We architected a high-performance web application using Three.js for 3D rendering in the browser, coupled with a robust backend for managing complex manufacturing orders.",
+        execution: "5-month build including 3D model optimization, secure payment processing, and an automated order-routing system to the manufacturing floor.",
+        results: [
+            { label: "Conversion Rate", value: "5.2%" },
+            { label: "Time on Site", value: "+400%" },
+            { label: "Global Sales", value: "Expanded 12x" },
+            { label: "Custom Orders", value: "1000+/mo" }
+        ]
+    },
+    'clinic-web': {
+        title: "Modern Dental Clinic Web Presence",
+        client: "Smile Design Group",
+        category: "Web Development",
+        overview: "A complete rebuild of a high-end dental clinic network's website, focusing on patient acquisition, SEO dominance, and seamless appointment booking.",
+        problem: "Their old website was slow, not mobile-friendly, and was losing local search rankings to competitors. Their online booking system was broken, forcing patients to call.",
+        strategy: "Constructed a lightning-fast, mobile-first website with targeted local SEO pages for each clinic location and integrated a friction-free patient portal.",
+        execution: "10-week project including new professional photography, copywriting, HIPAA-compliant form integration, and speed optimization.",
+        results: [
+            { label: "Page Speed Score", value: "98/100" },
+            { label: "New Patient Leads", value: "+150%" },
+            { label: "Organic Traffic", value: "+210%" },
+            { label: "Booking Completion", value: "85%" }
+        ]
+    },
+    'ai-meeting': {
+        title: "Automated AI Meeting Assistant",
+        client: "Venture Capital Partners",
+        category: "AI Automation",
+        overview: "Development and integration of a custom AI meeting assistant designed to transcribe, summarize, and extract actionable items from high-stakes investment meetings.",
+        problem: "Partners were spending hours every week writing meeting notes and following up on complex deal terms, leading to delayed communications and lost opportunities.",
+        strategy: "Built a secure, private LLM-powered tool that hooks directly into their video conferencing software to process conversations in real-time.",
+        execution: "4-month training phase to help the AI understand complex financial jargon and specific VC deal frameworks before firm-wide deployment.",
+        results: [
+            { label: "Time Saved", value: "15 hrs/wk" },
+            { label: "Action Item Catch Rate", value: "99%" },
+            { label: "Meeting Efficiency", value: "+40%" },
+            { label: "ROI", value: "250%" }
+        ]
+    },
+    'ai-pos': {
+        title: "Intelligent AI POS Integration",
+        client: "Retail Dynamics",
+        category: "AI Automation",
+        overview: "Integration of an AI-powered analytics engine directly into the client's point-of-sale systems across 150+ physical store locations.",
+        problem: "Store managers had no real-time insights into foot traffic conversion or dynamic stock needs, leading to overstaffing during slow hours and lost sales during unexpected rushes.",
+        strategy: "We built a custom machine-learning model that analyzes live POS transactions locally and cross-references them with external data like weather and local events.",
+        execution: "Phased 6-month rollout starting with 5 pilot stores. Integrated seamlessly with existing legacy register hardware via custom edge computing nodes.",
+        results: [
+            { label: "Labor Costs", value: "-15%" },
+            { label: "Upsell Success", value: "+28%" },
+            { label: "System Uptime", value: "99.9%" },
+            { label: "Revenue per SqFt", value: "+12%" }
         ]
     }
 };
 
 // Portfolio Data (YOUR ORIGINAL DATA - UNCHANGED)
 const portfolioItems = [
-    { id: 'ecommerce', title: "Luxury Retail Platform", category: "ecommerce", result: "180% Revenue" },
-    { id: 'fintech', title: "Neobank Redesign", category: "fintech", result: "2M Users" },
-    { id: 'healthcare', title: "Telemedicine Platform", category: "healthcare", result: "-40% Costs" },
-    { id: 'saas', title: "B2B Analytics Dashboard", category: "saas", result: "300% Engagement" },
-    { id: 'ecommerce2', title: "Fashion Marketplace", category: "ecommerce", result: "$50M GMV" },
-    { id: 'fintech2', title: "Crypto Trading App", category: "fintech", result: "$2B Volume" }
+    { id: 'pizza-shop', title: "Pizza Shop Solution", category: "web", result: "+300% Orders", image: "pizza.png" },
+    { id: 'voice-agent', title: "Voice Calling Agent", category: "ai", result: "24/7 Availability", image: "voice.png" },
+    { id: 'furniture-analysis', title: "Furniture Analysis", category: "analytics", result: "Real-time Data", image: "furniture.png" },
+    { id: 'perfume-social', title: "Perfume Brand Campaign", category: "social", result: "12M+ Impressions", image: "perfume.png" },
+    { id: 'machine-analytics', title: "Industrial IoT Analytics", category: "analytics", result: "65% Less Downtime", image: "machine.png" },
+    { id: 'mining-analytics', title: "Global Supply Chain", category: "analytics", result: "$12M Saved", image: "minning.png" },
+    { id: 'shoes-web', title: "Custom Footwear Platform", category: "web", result: "5.2% Conversion", image: "shoes.png" },
+    { id: 'clinic-web', title: "Dental Clinic Network", category: "web", result: "+150% New Patients", image: "clinic.png" },
+    { id: 'ai-meeting', title: "AI Meeting Assistant", category: "ai", result: "15 hrs/wk Saved", image: "meeting.png" },
+    { id: 'ai-pos', title: "Intelligent AI POS", category: "ai", result: "Labor Costs -15%", image: "pos.png" }
 ];
 
 function loadServiceDetail(serviceId) {
@@ -572,23 +681,34 @@ function loadCaseStudy(caseId) {
 
 function loadPortfolio() {
     const grid = document.getElementById('portfolio-grid');
-    grid.innerHTML = portfolioItems.map((item, i) => `
+    grid.innerHTML = portfolioItems.map((item, i) => {
+        let btnText = '';
+        if (item.category === 'social') btnText = 'Visit Page <i class="fas fa-arrow-right ml-1"></i>';
+        else if (item.category === 'web') btnText = 'Visit Site <i class="fas fa-arrow-right ml-1"></i>';
+        else if (item.category === 'ai' && item.id !== 'voice-agent') btnText = 'Visit App <i class="fas fa-arrow-right ml-1"></i>';
+
+        return `
         <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: ${i * 0.1}s" onclick="router.navigate('case-study', '${item.id}')" data-category="${item.category}">
             <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden rounded-lg">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#00b894]/10 to-[#9b59b6]/10"></div>
+                ${item.image ?
+                `<img src="${item.image}" alt="${item.title}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-[#00b894]/20 to-[#9b59b6]/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>` :
+                `<div class="absolute inset-0 bg-gradient-to-br from-[#00b894]/10 to-[#9b59b6]/10"></div>
                 <div class="absolute inset-0 flex items-center justify-center">
                     <div class="text-4xl font-bold text-white/10">${item.title.charAt(0)}</div>
-                </div>
+                </div>`}
                 <div class="portfolio-overlay absolute inset-0 flex flex-col justify-end p-6">
                     <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         <div class="text-[#00b894] text-xs font-medium mb-1 uppercase">${item.category}</div>
                         <h3 class="text-xl font-bold mb-1">${item.title}</h3>
-                        <div class="text-[#00b894] font-bold">${item.result}</div>
+                        <div class="text-[#00b894] font-bold mb-3">${item.result}</div>
+                        ${btnText ? `<div class="inline-block px-4 py-2 border border-white/20 rounded-full text-xs text-white bg-black/40 backdrop-blur-sm group-hover:bg-[#00b894] group-hover:border-[#00b894] transition-all duration-300 mt-2">${btnText}</div>` : ''}
                     </div>
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 
     setTimeout(observeSections, 100);
 }
@@ -1299,5 +1419,37 @@ document.addEventListener('DOMContentLoaded', () => {
     initServicesStream();
     initPortfolioCrystals();
     initRoadAnimation();
+    initTestimonials();
     observeSections();
 });
+
+function initTestimonials() {
+    const cards = document.querySelectorAll('.testimonial-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (centerY - y) / 15;
+            const rotateY = (x - centerX) / 15;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+
+            // Move glow effect if we add one later
+            const glow = card.querySelector('.glow-effect');
+            if (glow) {
+                glow.style.left = `${x}px`;
+                glow.style.top = `${y}px`;
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)`;
+        });
+    });
+}
