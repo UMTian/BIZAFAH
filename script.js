@@ -494,19 +494,24 @@ const caseStudyData = {
             { label: "ROI Timeframe", value: "4 Months" }
         ]
     },
-    'mining-analytics': {
-        title: "Global Supply Chain Mining Analytics",
-        client: "Terra Resources",
-        category: "Data Analytics",
-        overview: "A complex data visualization platform merging geological data, supply chain logistics, and market pricing to optimize mineral extraction and shipping.",
-        problem: "Data was fragmented across dozens of separate systems worldwide, making it impossible for executives to make timely decisions on production volume vs market demand.",
-        strategy: "Created an enterprise-wide single source of truth, utilizing advanced geospatial analytics and predictive pricing models.",
-        execution: "12-month enterprise deployment, integrating with Oracle ERP, custom geological software, and global shipping APIs.",
+    'amir-majeed-mining': {
+        title: "Amir Majeed Group – Stone Mining & Pollution Control Analytics",
+        client: "Amir Majeed Group of Company",
+        category: "Data Analytics & Environmental Optimization",
+
+        overview: "Amir Majeed Group faced a complete operational shutdown of their stone mining and crushing facility due to environmental pollution violations. We developed a data-driven model to optimize site operations and meet regulatory standards for a successful reopening.",
+
+        problem: "The site was closed by authorities following repeated pollution complaints. High dust concentration and noise levels during peak hours were the primary violations, resulting in 100% revenue loss and stalled supply to major construction projects.",
+
+        strategy: "We synchronized mining stages with local environmental factors. This involved analyzing wind patterns and community activity to reschedule high-impact tasks like blasting and crushing to minimize the environmental footprint while maintaining output.",
+
+        execution: "Total project duration: 5 Weeks. 1. Deployment of air quality and noise monitoring sensors. 2. Analysis of blasting vibration data. 3. Creation of an Optimized Operational Schedule adjusting blasting timings, crushing windows, and delivery routes.",
+
         results: [
-            { label: "Logistics Optimization", value: "$12M Saved" },
-            { label: "Decision Speed", value: "10x Faster" },
-            { label: "Yield Accuracy", value: "99.2%" },
-            { label: "Market Adaptability", value: "+20%" }
+            { label: "Site Status", value: "Successfully Reopened" },
+            { label: "Pollution Reduction", value: "45% Lower" },
+            { label: "Operational Efficiency", value: "+20%" },
+            { label: "Community Complaints", value: "Zero" }
         ]
     },
     'shoes-web': {
@@ -597,7 +602,7 @@ const portfolioItems = [
     { id: 'interwood-predictive', title: "Interwood Predictive Stock", category: "analytics", result: "22% Overstock Reduction", image: "furniture.png" },
     { id: 'perfume-social', title: "Perfume Brand Campaign", category: "social", result: "12M+ Impressions", image: "perfume.png", link: "https://www.instagram.com/velirra.store?igsh=eDBwNzFlNGR5eHY0" },
     { id: 'machine-analytics', title: "Industrial IoT Analytics", category: "analytics", result: "65% Less Downtime", image: "machine.png" },
-    { id: 'mining-analytics', title: "Global Supply Chain", category: "analytics", result: "$12M Saved", image: "minning.png" },
+    { id: 'amir-majeed-mining', title: "Amir Majeed Group Mining", category: "analytics", result: "Site Reopened", image: "minning.png" },
     { id: 'shoes-web', title: "Custom Footwear Platform", category: "web", result: "5.2% Conversion", image: "shoes.png", link: "https://turkishshoes.com" },
     { id: 'clinic-web', title: "Dental Clinic Network", category: "web", result: "+150% New Patients", image: "clinic.png", link: "https://thinkgp.uk" },
     { id: 'ai-meeting', title: "AI Meeting Assistant", category: "ai", result: "15 hrs/wk Saved", image: "meeting.png" },
@@ -798,7 +803,7 @@ function loadPortfolio() {
             : `router.navigate('case-study', '${item.id}')`;
 
         return `
-        <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: ${i * 0.1}s" onclick="${clickHandler}" data-category="${item.category}">
+        <div class="portfolio-card group cursor-pointer" onclick="${clickHandler}" data-category="${item.category}">
             <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden rounded-lg">
                 ${item.image ?
                 `<img src="${item.image}" alt="${item.title}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500">
