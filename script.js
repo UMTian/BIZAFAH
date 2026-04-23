@@ -404,53 +404,69 @@ const serviceData = {
 // Case Study Data (YOUR ORIGINAL DATA - UNCHANGED)
 const caseStudyData = {
     'pizza-shop': {
-        title: "Pizza Shop Website Building Solution",
-        client: "Slice Masters",
-        category: "Web Development",
-        overview: "A modern, high-converting digital storefront and ordering system designed to dramatically increase online sales for a busy pizza shop.",
-        problem: "The shop relied entirely on third-party delivery apps that took 30% cuts. Their existing website was non-responsive and lacked online ordering capabilities, leading to lost direct sales.",
-        strategy: "We built a custom, mobile-first web application featuring a friction-free ordering process, mouth-watering visual menus, and seamless integration with their point-of-sale system.",
-        execution: "4-week rapid development cycle including UX design, custom photography, secure payment gateway integration, and staff training on the new digital order flow.",
+        title: "Pizza M21 – Digital Presence & Direct Ordering System",
+        client: "Pizza M21",
+        link: "https://www.pizzam21.pk/",
+        category: "Full-Stack Web Development",
+
+        overview: "Pizza M21, a local favorite, lacked a digital storefront, forcing customers to rely on phone calls or third-party apps. We built a high-speed, mobile-first website to transition them from 100% manual orders to a streamlined digital workflow.",
+
+        problem: "The brand suffered from a 25% revenue loss due to aggregator commissions and a 15% order error rate during the 8 PM – 11 PM peak rush. Without a digital menu, customers had to call to ask for prices, leading to a 30% call-drop rate during busy hours.",
+
+        strategy: "Developed a 'Speed-First' web application optimized for 3G/4G speeds in Pakistan. Focused on a frictionless UI that allows users to view the 'Deal of the Day' and checkout via WhatsApp integration in under 60 seconds.",
+
+        execution: "Total development to launch: 3 Weeks. This included UI/UX design, custom menu architecture, Google Maps API integration for delivery zones, and staff training on the new digital dashboard.",
+
         results: [
-            { label: "Online Orders", value: "+300%" },
-            { label: "Third-party Fees Saved", value: "$45k/yr" },
-            { label: "Mobile Conversion", value: "8.5%" },
-            { label: "Average Order Value", value: "+22%" }
+            { label: "Direct Online Revenue", value: "40% Increase" },
+            { label: "Order Processing Speed", value: "2x Faster" },
+            { label: "Aggregator Commission Saved", value: "28% per order" },
+            { label: "Mobile Page Load Time", value: "1.2 Seconds" }
         ]
     },
-    'voice-agent': {
-        title: "Voice Calling Agent Project",
-        client: "Global Logistics Co.",
-        category: "AI Automation",
-        overview: "Implementation of an advanced conversational AI voice agent to handle high-volume customer inquiries, dispatch routing, and automated follow-ups.",
-        problem: "Customer service agents were overwhelmed with repetitive 'Where is my order?' queries, leading to long hold times (avg 15 mins) and plummeting customer satisfaction scores.",
-        strategy: "Deploy a natural language processing voice agent capable of understanding multiple accents, querying the logistics database in real-time, and seamlessly escalating complex issues to human agents.",
-        execution: "3-month implementation including dialogue mapping, API integrations with tracking systems, voice synthesis tuning, and rigorous edge-case testing.",
+    'papa-johns-ai': {
+        title: "Papa John’s – 24/7 AI Voice Ordering & Customer Support",
+        client: "Papa John’s (Pakistan Franchise)",
+        category: "AI & Automation",
+
+        overview: "Papa John’s faced a major challenge with missed orders during late-night hours and peak weekend rushes. We developed and deployed a custom AI Voice Agent that handles natural language phone orders and customer inquiries 24/7 without human intervention.",
+
+        problem: "During the 9 PM – 1 AM peak window, the call center experienced a 35% call-drop rate due to long wait times. Additionally, managing a 24/7 human-led desk for late-night delivery was costing 40,000+ PKR per seat monthly in overhead, while still missing 'out-of-hours' revenue from customers calling after 2 AM.",
+
+        strategy: "Built a low-latency, bilingual (Urdu/English) Voice AI integrated with the Papa John’s POS and inventory system. The agent was designed to upsell (e.g., 'Would you like to add a 1.5L Coke for 250 PKR?') and verify delivery addresses using Google Maps Geocoding.",
+
+        execution: "Total development to launch: 6 Weeks. This included training the LLM on the specific Papa John’s menu, integrating with the Twilio/Cloud PBX infrastructure, and fine-tuning the 'Urdu-English' code-switching for local dialect accuracy.",
+
         results: [
-            { label: "Availability", value: "24/7" },
-            { label: "Calls Handled", value: "10k+/day" },
-            { label: "Hold Time", value: "< 5 secs" },
-            { label: "Deflection Rate", value: "75%" }
+            { label: "Missed Call Rate", value: "0%" },
+            { label: "Operational Cost Saving", value: "65% Monthly" },
+            { label: "Average Upsell Success", value: "18%" },
         ]
     },
-    'furniture-analysis': {
-        title: "Stock and Sales Analysis for Furniture",
-        client: "Urban Home Design",
+    'interwood-predictive': {
+        title: "Interwood – AI-Driven Predictive Inventory & Stock Optimization",
+        client: "Interwood Mobel (Pvt.) Ltd.",
         category: "Data Analytics",
-        overview: "A comprehensive data warehousing and visualization project designed to give a national furniture retailer real-time visibility into their inventory and sales performance.",
-        problem: "Data was locked in siloed legacy systems. It took the operations team two weeks to generate sales reports, leading to frequent stockouts of popular items and overstock of slow movers.",
-        strategy: "Build an automated ETL pipeline feeding into a centralized data warehouse, layered with interactive PowerBI dashboards for regional managers and executive leadership.",
-        execution: "8-week data engineering sprint to connect POS, ERP, and e-commerce platforms, followed by 4 weeks of dashboard design and user adoption workshops.",
+
+        overview: "Interwood operates a 600,000 sq. ft. manufacturing facility and a nationwide retail network. We developed a predictive analytics engine to solve the 'Furniture Paradox': high storage costs for overstock versus lost high-ticket sales due to understocking.",
+
+        problem: "The company faced an average Inventory Turnover of 300+ days, meaning capital was tied up for nearly a year per item. Overstocking of slow-moving items (like specific office desk variants) increased warehousing costs by 12% annually, while understocking popular home furniture lines led to a 20% loss in potential revenue during wedding seasons.",
+
+        strategy: "Implemented a Time-Series Forecasting model (Prophet/XGBoost) to predict demand at a SKU level. We categorized inventory using ABC/VED Analysis, ensuring 'Category A' items (high-value sofas/beds) had a 95% in-stock rate, while optimizing safety stock for 'Category C' items to free up warehouse space.",
+
+        execution: "Project duration: 8 Weeks. 1. Data Cleaning: Aggregating 3+ years of historical POS data. 2. Model Development: Accounting for Pakistani seasonal trends (Eid, Wedding Season, and Year-end corporate cycles). 3. Dashboard Integration: Building a 'Stock-Alert' system for procurement teams.",
+
         results: [
-            { label: "Reporting Speed", value: "Real-time" },
-            { label: "Inventory Costs", value: "-18%" },
-            { label: "Stockouts", value: "Down 85%" },
-            { label: "Sales Margin", value: "+4.2%" }
+            { label: "Reduction in Overstock", value: "22%" },
+            { label: "Stock-out Prevention", value: "15% Improvement" },
+            { label: "Warehouse Holding Cost", value: "10% Decrease" },
+            { label: "Forecast Accuracy", value: "88%" }
         ]
     },
     'perfume-social': {
         title: "Perfume Brand Social Campaign",
         client: "Aura Fragrances",
+        link: "https://www.instagram.com/velirra.store?igsh=eDBwNzFlNGR5eHY0",
         category: "Social Media",
         overview: "A comprehensive social media overhaul and influencer marketing campaign designed to launch a new line of premium fragrances to a younger demographic.",
         problem: "The brand had a legacy image and was struggling to connect with Gen Z and millennial consumers on platforms like TikTok and Instagram. Engagement rates were below 0.5%.",
@@ -496,6 +512,7 @@ const caseStudyData = {
     'shoes-web': {
         title: "Custom Footwear Web Platform",
         client: "Sole Craft",
+        link: "https://turkishshoes.com",
         category: "Web Development",
         overview: "A highly interactive e-commerce platform featuring a custom 3D shoe configurator, allowing users to design and order bespoke sneakers.",
         problem: "The client was relying on offline custom orders, which severely limited scalability. They needed a web platform that replicated the premium, personalized in-store design experience.",
@@ -511,6 +528,7 @@ const caseStudyData = {
     'clinic-web': {
         title: "Modern Dental Clinic Web Presence",
         client: "Smile Design Group",
+        link: "https://thinkgp.uk",
         category: "Web Development",
         overview: "A complete rebuild of a high-end dental clinic network's website, focusing on patient acquisition, SEO dominance, and seamless appointment booking.",
         problem: "Their old website was slow, not mobile-friendly, and was losing local search rankings to competitors. Their online booking system was broken, forcing patients to call.",
@@ -541,6 +559,7 @@ const caseStudyData = {
     'ai-pos': {
         title: "Intelligent AI POS Integration",
         client: "Retail Dynamics",
+        link: "https://pos-tau-lyart.vercel.app/",
         category: "AI Automation",
         overview: "Integration of an AI-powered analytics engine directly into the client's point-of-sale systems across 150+ physical store locations.",
         problem: "Store managers had no real-time insights into foot traffic conversion or dynamic stock needs, leading to overstaffing during slow hours and lost sales during unexpected rushes.",
@@ -552,21 +571,39 @@ const caseStudyData = {
             { label: "System Uptime", value: "99.9%" },
             { label: "Revenue per SqFt", value: "+12%" }
         ]
+    },
+    'coffee-social': {
+        title: "Artisan Coffee Social Growth",
+        client: "Brew Haven Roasters",
+        link: "https://www.instagram.com/contracoffee.pk?igsh=MWNtaTJ6bmdlNzBjYw%3D%3D",
+        category: "Social Media",
+        overview: "A highly visual social media campaign designed to position an independent local roaster as a premium neighborhood destination and drive foot traffic.",
+        problem: "Despite having incredible quality coffee, the shop was struggling to stand out on social media. Their feeds were inconsistent, lacking brand identity, and they were losing local market share to massive chains.",
+        strategy: "We executed a complete aesthetic rebrand of their social grids, focusing on behind-the-scenes barista craftsmanship, community engagement, and hyper-local target ads.",
+        execution: "3-month continuous content rollout including bi-weekly professional photography sessions, user-generated content features, and localized influencer meetups.",
+        results: [
+            { label: "Foot Traffic", value: "+40%" },
+            { label: "Follower Growth", value: "8x" },
+            { label: "Cost Per Acquisition", value: "$1.12" },
+            { label: "Engagement", value: "9.5%" }
+        ]
     }
 };
 
 // Portfolio Data (YOUR ORIGINAL DATA - UNCHANGED)
 const portfolioItems = [
-    { id: 'pizza-shop', title: "Pizza Shop Solution", category: "web", result: "+300% Orders", image: "pizza.png" },
-    { id: 'voice-agent', title: "Voice Calling Agent", category: "ai", result: "24/7 Availability", image: "voice.png" },
-    { id: 'furniture-analysis', title: "Furniture Analysis", category: "analytics", result: "Real-time Data", image: "furniture.png" },
-    { id: 'perfume-social', title: "Perfume Brand Campaign", category: "social", result: "12M+ Impressions", image: "perfume.png" },
+    { id: 'pizza-shop', title: "Pizza Shop Solution", category: "web", result: "+300% Orders", image: "pizza.png", link: "https://www.pizzam21.pk/" },
+    { id: 'papa-johns-ai', title: "Papa John's AI Voice Agent", category: "ai", result: "0% Missed Calls", image: "voice.png" },
+    { id: 'interwood-predictive', title: "Interwood Predictive Stock", category: "analytics", result: "22% Overstock Reduction", image: "furniture.png" },
+    { id: 'perfume-social', title: "Perfume Brand Campaign", category: "social", result: "12M+ Impressions", image: "perfume.png", link: "https://www.instagram.com/velirra.store?igsh=eDBwNzFlNGR5eHY0" },
     { id: 'machine-analytics', title: "Industrial IoT Analytics", category: "analytics", result: "65% Less Downtime", image: "machine.png" },
     { id: 'mining-analytics', title: "Global Supply Chain", category: "analytics", result: "$12M Saved", image: "minning.png" },
-    { id: 'shoes-web', title: "Custom Footwear Platform", category: "web", result: "5.2% Conversion", image: "shoes.png" },
-    { id: 'clinic-web', title: "Dental Clinic Network", category: "web", result: "+150% New Patients", image: "clinic.png" },
+    { id: 'shoes-web', title: "Custom Footwear Platform", category: "web", result: "5.2% Conversion", image: "shoes.png", link: "https://turkishshoes.com" },
+    { id: 'clinic-web', title: "Dental Clinic Network", category: "web", result: "+150% New Patients", image: "clinic.png", link: "https://thinkgp.uk" },
     { id: 'ai-meeting', title: "AI Meeting Assistant", category: "ai", result: "15 hrs/wk Saved", image: "meeting.png" },
-    { id: 'ai-pos', title: "Intelligent AI POS", category: "ai", result: "Labor Costs -15%", image: "pos.png" }
+    { id: 'ai-pos', title: "Intelligent AI POS", category: "ai", result: "Labor Costs -15%", image: "pos.png", link: "https://pos-tau-lyart.vercel.app/" },
+    { id: 'coffee-social', title: "Artisan Coffee Campaign", category: "social", result: "8x Follower Growth", image: "coffee.png", link: "https://www.instagram.com/contracoffee.pk?igsh=MWNtaTJ6bmdlNzBjYw%3D%3D" },
+    { id: 'direct-reel', title: "Viral Reel Campaign", category: "social", result: "Watch Reel", image: "concert.png", link: "https://www.instagram.com/reels/DLYDezio-pN/", directLinkOnly: true }
 ];
 
 function loadServiceDetail(serviceId) {
@@ -635,6 +672,60 @@ function loadCaseStudy(caseId) {
     if (!study) return;
 
     const content = document.getElementById('case-study-content');
+
+    // Handle features array
+    let featuresHtml = '';
+    if (study.features && Array.isArray(study.features)) {
+        featuresHtml = `
+            <div class="glass-card p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-4 text-[#00b894]">Key Features</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    ${study.features.map(f => `
+                        <div class="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10 hover:border-[#00b894]/30 transition-colors">
+                            <span class="text-[#00b894]">✓</span>
+                            <span class="text-gray-300 text-sm">${f}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // Handle execution (object or string)
+    let executionHtml = '';
+    if (study.execution && typeof study.execution === 'object') {
+        executionHtml = `
+            <div class="glass-card p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-6 text-blue-400">Project Timeline</h3>
+                <div class="space-y-6">
+                    ${study.execution.timeline.map((step, i) => `
+                        <div class="flex gap-6 relative ${i !== study.execution.timeline.length - 1 ? 'pb-6' : ''}">
+                            ${i !== study.execution.timeline.length - 1 ? '<div class="absolute left-4 top-8 bottom-0 w-px bg-white/10"></div>' : ''}
+                            <div class="w-8 h-8 rounded-full bg-blue-400/10 border border-blue-400/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-bold text-sm z-10">
+                                ${i + 1}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">${step.phase}</h4>
+                                <div class="text-blue-400 text-sm font-medium">${step.time}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div class="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-gray-400 font-medium italic">Total Project Duration</span>
+                        <span class="text-blue-400 font-bold px-4 py-1 bg-blue-400/10 rounded-full border border-blue-400/20">${study.execution.total_time}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        executionHtml = `
+            <div class="glass-card p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-4 text-blue-400">Execution</h3>
+                <p class="text-gray-300 leading-relaxed">${study.execution || 'Details coming soon...'}</p>
+            </div>
+        `;
+    }
+
     content.innerHTML = `
         <div class="mb-12">
             <div class="text-[#00b894] text-sm tracking-widest uppercase mb-4">${study.category}</div>
@@ -667,13 +758,12 @@ function loadCaseStudy(caseId) {
                 <p class="text-gray-300 leading-relaxed">${study.strategy}</p>
             </div>
 
-            <div class="glass-card p-8 rounded-xl">
-                <h3 class="text-2xl font-bold mb-4 text-blue-400">Execution</h3>
-                <p class="text-gray-300 leading-relaxed">${study.execution}</p>
-            </div>
+            ${featuresHtml}
+            ${executionHtml}
         </div>
 
-        <div class="mt-12 text-center">
+        <div class="mt-12 text-center flex flex-col sm:flex-row gap-4 justify-center items-center">
+            ${study.link ? `<a href="${study.link}" target="_blank" class="btn-secondary text-lg px-12 py-4">Visit Live Project</a>` : ''}
             <button class="btn-primary text-lg px-12 py-4" onclick="scrollToContact()">Discuss Your Project</button>
         </div>
     `;
@@ -682,13 +772,33 @@ function loadCaseStudy(caseId) {
 function loadPortfolio() {
     const grid = document.getElementById('portfolio-grid');
     grid.innerHTML = portfolioItems.map((item, i) => {
-        let btnText = '';
-        if (item.category === 'social') btnText = 'Visit Page <i class="fas fa-arrow-right ml-1"></i>';
-        else if (item.category === 'web') btnText = 'Visit Site <i class="fas fa-arrow-right ml-1"></i>';
-        else if (item.category === 'ai' && item.id !== 'voice-agent') btnText = 'Visit App <i class="fas fa-arrow-right ml-1"></i>';
+        let btnHtml = '';
+
+        // 1. Read Case Study Button (Default for all except direct reels)
+        if (!item.directLinkOnly) {
+            btnHtml += `<div class="inline-block px-4 py-2 border border-white/20 rounded-full text-[10px] uppercase tracking-wider text-white bg-white/5 backdrop-blur-sm group-hover:bg-[#00b894] group-hover:border-[#00b894] transition-all duration-300 mt-2 mr-2">Read Case Study</div>`;
+        } else {
+            // Special Case for Reels
+            btnHtml += `<div class="inline-block px-4 py-2 border border-white/20 rounded-full text-[10px] uppercase tracking-wider text-white bg-white/5 backdrop-blur-sm group-hover:bg-[#9b59b6] group-hover:border-[#9b59b6] transition-all duration-300 mt-2 mr-2">Watch Reel</div>`;
+        }
+
+        // 2. Visit Site/Page/App Button (For Web/Social/AI items with links)
+        if (item.link) {
+            if (item.category === 'web') {
+                btnHtml += `<a href="${item.link}" target="_blank" onclick="event.stopPropagation()" class="inline-block px-4 py-2 border border-[#00b894]/50 rounded-full text-[10px] uppercase tracking-wider text-[#00b894] hover:bg-[#00b894] hover:text-white transition-all duration-300 mt-2">Visit Site <i class="fas fa-external-link-alt ml-1"></i></a>`;
+            } else if (item.category === 'social' && !item.directLinkOnly) {
+                btnHtml += `<a href="${item.link}" target="_blank" onclick="event.stopPropagation()" class="inline-block px-4 py-2 border border-[#9b59b6]/50 rounded-full text-[10px] uppercase tracking-wider text-[#9b59b6] hover:bg-[#9b59b6] hover:text-white transition-all duration-300 mt-2">Visit Page <i class="fab fa-instagram ml-1"></i></a>`;
+            } else if (item.category === 'ai' && item.id !== 'papa-johns-ai') {
+                btnHtml += `<a href="${item.link}" target="_blank" onclick="event.stopPropagation()" class="inline-block px-4 py-2 border border-[#00b894]/50 rounded-full text-[10px] uppercase tracking-wider text-[#00b894] hover:bg-[#00b894] hover:text-white transition-all duration-300 mt-2">Visit App <i class="fas fa-rocket ml-1"></i></a>`;
+            }
+        }
+
+        let clickHandler = item.directLinkOnly
+            ? `window.open('${item.link}', '_blank')`
+            : `router.navigate('case-study', '${item.id}')`;
 
         return `
-        <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: ${i * 0.1}s" onclick="router.navigate('case-study', '${item.id}')" data-category="${item.category}">
+        <div class="portfolio-card group cursor-pointer section-hidden" style="transition-delay: ${i * 0.1}s" onclick="${clickHandler}" data-category="${item.category}">
             <div class="aspect-[4/3] bg-gray-800 relative overflow-hidden rounded-lg">
                 ${item.image ?
                 `<img src="${item.image}" alt="${item.title}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-500">
@@ -703,7 +813,7 @@ function loadPortfolio() {
                         <div class="text-[#00b894] text-xs font-medium mb-1 uppercase">${item.category}</div>
                         <h3 class="text-xl font-bold mb-1">${item.title}</h3>
                         <div class="text-[#00b894] font-bold mb-3">${item.result}</div>
-                        ${btnText ? `<div class="inline-block px-4 py-2 border border-white/20 rounded-full text-xs text-white bg-black/40 backdrop-blur-sm group-hover:bg-[#00b894] group-hover:border-[#00b894] transition-all duration-300 mt-2">${btnText}</div>` : ''}
+                        ${btnHtml}
                     </div>
                 </div>
             </div>
