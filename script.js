@@ -592,6 +592,38 @@ const caseStudyData = {
             { label: "Cost Per Acquisition", value: "$1.12" },
             { label: "Engagement", value: "9.5%" }
         ]
+    },
+    'imperio-scents': {
+        title: "Imperio Scents – Luxury Fragrance E-commerce",
+        client: "Imperio Scents",
+        link: "https://www.imperioscents.store/",
+        category: "Web Development",
+        overview: "A premium e-commerce platform for an artisanal perfume brand, designed to capture the essence of luxury and sophistication while providing a seamless shopping experience.",
+        problem: "The client needed a digital storefront that reflected their high-end brand identity and Paris-New York-Tokyo manufacturing heritage. The challenge was to balance high-fidelity visual storytelling with technical performance.",
+        strategy: "We architected a minimalist, 'visual-first' interface that emphasizes product craftsmanship. The solution involved custom layout modules for fragrance families and an optimized checkout flow tailored for luxury consumers.",
+        execution: "4-week agile sprint. 1. UI/UX: Design focused on 'Space Grotesk' typography and immersive imagery. 2. Performance: Implementation of next-gen image formats and lazy loading for sub-second page speeds. 3. SEO: Technical optimization for international luxury fragrance keywords.",
+        results: [
+            { label: "User Engagement", value: "+45%" },
+            { label: "Mobile Conversion", value: "3.2%" },
+            { label: "Page Load Speed", value: "0.9s" },
+            { label: "Organic Search Rank", value: "Top 10" }
+        ]
+    },
+    'velirra-luxury': {
+        title: "Velirra – High-End Parfumerie Digital Transformation",
+        client: "Velirra",
+        link: "https://velirra.store/",
+        category: "Web Development",
+        overview: "Transformation of a luxury inspired-perfumery into a nationwide digital leader through a robust, high-performance web platform.",
+        problem: "Velirra's existing sales channels were fragmented. They lacked a unified digital presence that could effectively communicate their 'Luxury Grade' quality and vision of making high-end scents accessible.",
+        strategy: "Developed a 'Signature Scent' navigation matrix, categorizing perfumes by mood and family (Aqua, Bloom, Intense). The UX was engineered to build trust through transparent mission statements and premium client testimonials.",
+        execution: "6-week project lifecycle. Key phases included backend inventory synchronization, responsive UI development for diverse screen sizes, and integration of WhatsApp-based premium consulting for personalized sales.",
+        results: [
+            { label: "Nationwide Growth", value: "12x" },
+            { label: "Client Retention", value: "92%" },
+            { label: "Traffic via Mobile", value: "85%" },
+            { label: "Lead Generation", value: "+200%" }
+        ]
     }
 };
 
@@ -608,7 +640,9 @@ const portfolioItems = [
     { id: 'ai-meeting', title: "AI Meeting Assistant", category: "ai", result: "15 hrs/wk Saved", image: "meeting.png" },
     { id: 'ai-pos', title: "Intelligent AI POS", category: "ai", result: "Labor Costs -15%", image: "pos.png", link: "https://pos-tau-lyart.vercel.app/" },
     { id: 'coffee-social', title: "Artisan Coffee Campaign", category: "social", result: "8x Follower Growth", image: "coffee.png", link: "https://www.instagram.com/contracoffee.pk?igsh=MWNtaTJ6bmdlNzBjYw%3D%3D" },
-    { id: 'direct-reel', title: "Viral Reel Campaign", category: "social", result: "Watch Reel", image: "concert.png", link: "https://www.instagram.com/reels/DLYDezio-pN/", directLinkOnly: true }
+    { id: 'direct-reel', title: "Viral Reel Campaign", category: "social", result: "Watch Reel", image: "concert.png", link: "https://www.instagram.com/reels/DLYDezio-pN/", directLinkOnly: true },
+    { id: 'imperio-scents', title: "Imperio Scents E-commerce", category: "web", result: "0.9s Load Speed", image: "malebk.png", link: "https://www.imperioscents.store/" },
+    { id: 'velirra-luxury', title: "Velirra Luxury Store", category: "web", result: "12x Growth", image: "general.png", link: "https://velirra.store/" }
 ];
 
 function loadServiceDetail(serviceId) {
