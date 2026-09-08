@@ -50,6 +50,19 @@ const router = {
     history: [],
 
     navigate(page, param = null) {
+        // Portfolio and case-study pages live in the standalone portfolio.html
+        if (page === 'portfolio' || page === 'case-study') {
+            const pageExists = document.getElementById(`page-${page}`) !== null;
+            if (!pageExists) {
+                let url = 'portfolio.html';
+                if (page === 'case-study' && param) {
+                    url += '?case=' + encodeURIComponent(param);
+                }
+                window.location.href = url;
+                return;
+            }
+        }
+
         this.history.push(this.currentPage);
         this.currentPage = page;
 
@@ -86,13 +99,27 @@ const router = {
             const prev = this.history.pop();
             this.currentPage = prev;
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${prev}`).classList.add('active');
-            window.scrollTo(0, 0);
 
-            // Clear active scenes when switching pages
-            animationController.activeScenes.clear();
+            const targetPage = document.getElementById(`page-${prev}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0);
 
-            setTimeout(observeSections, 100);
+                // Clear active scenes when switching pages
+                animationController.activeScenes.clear();
+
+                if (prev === 'portfolio') {
+                    loadPortfolio();
+                }
+
+                setTimeout(observeSections, 100);
+            } else {
+                // Target page isn't available on this document (cross-page); go home
+                window.location.href = 'index.html';
+            }
+        } else {
+            // No history available; return to the home page
+            window.location.href = 'index.html';
         }
     }
 };
@@ -624,6 +651,90 @@ const caseStudyData = {
             { label: "Traffic via Mobile", value: "85%" },
             { label: "Lead Generation", value: "+200%" }
         ]
+    },
+    'advolva': {
+        title: "Advolva – Interactive SaaS Product Platform",
+        client: "Advolva",
+        link: "https://adsolva.vercel.app/",
+        category: "Web Development",
+
+        overview: "Advolva required a modern, interactive showcase for their Software-as-a-Service offering. We built a high-performance web platform that explains their product through engaging, scroll-driven animations and embedded demos that clearly communicate complex features to both technical and non-technical visitors.",
+
+        problem: "Their previous marketing site was static and failed to explain the product's value, resulting in low engagement and a 3% conversion rate from trial sign-ups. Visitors dropped off before understanding the core benefits.",
+
+        strategy: "Created a component-based architecture using modern frontend tooling, with a storytelling flow that reveals features progressively as the user scrolls. Integrated a live product tour and interactive comparison widgets to drive conversions.",
+
+        execution: "4-week agile sprint. 1. UI/UX: Designed a 'product-as-a-story' layout. 2. Performance: Used Vite + React with code-splitting for sub-second load times. 3. Interactivity: Built custom scroll-linked animations and a reusable component library for future feature pages.",
+
+        results: [
+            { label: "Conversion Rate", value: "9.7%" },
+            { label: "Page Load Speed", value: "1.1s" },
+            { label: "Bounce Rate", value: "-58%" },
+            { label: "Trial Sign-ups", value: "3x" }
+        ]
+    },
+    'aireportly': {
+        title: "AirReportly – AI-Powered Blog Publishing Platform",
+        client: "AirReportly",
+        link: "https://www.aireportly.com/",
+        category: "Web Development",
+
+        overview: "AirReportly is a content publishing platform that leverages AI to help writers and marketers generate, refine, and distribute blog content efficiently. We built a full-stack web application with an intuitive editor, AI-assisted writing tools, and analytics dashboards.",
+
+        problem: "Content creators were juggling multiple tools for writing, AI enhancement, plagiarism checks, and publishing. Manual workflows led to inconsistent publishing schedules and diluted brand voice across distributed teams.",
+
+        strategy: "Developed an all-in-one platform with a rich-text editor integrated with AI writing assistants, a content calendar, and multi-channel publishing capabilities. Focused on delivering a distraction-free editing experience and robust admin controls.",
+
+        execution: "8-week build. 1. Backend: Node.js + PostgreSQL for content and user management. 2. Editor: Custom React-based rich-text editor with collaborative features. 3. AI Layer: Integrated OpenAI API for content suggestions, paraphrasing, and headline generation.",
+
+        results: [
+            { label: "Content Throughput", value: "2x" },
+            { label: "Editor Retention", value: "94%" },
+            { label: "Publish Consistency", value: "+140%" },
+            { label: "Monthly Writers", value: "150+" }
+        ]
+    },
+    'unaiza': {
+        title: "Unaiza – Designer Portfolio Showcase",
+        client: "Unaiza",
+        link: "https://unaiza-portfolio.vercel.app/",
+        category: "Web Development",
+
+        overview: "A bespoke portfolio website for a multidisciplinary designer, built to showcase their award-winning visual and digital work through an immersive, gallery-first experience.",
+
+        problem: "The designer had no central digital home for their work, relying on scattered social media posts and PDFs. Their personal brand felt fragmented and unprofessional to potential clients and collaborators.",
+
+        strategy: "Designed and developed a minimal, performance-focused portfolio that puts the work front and center. Implemented a responsive, masonry-style gallery with smooth lightboxed navigation and subtle micro-interactions to elevate the user experience.",
+
+        execution: "3-week sprint. 1. Design: Clean editorial layout with custom typography hierarchy. 2. Development: Next.js with server-side image optimization for lightning-fast gallery loads. 3. Deployment: Hosted on Vercel with global CDN for worldwide performance.",
+
+        results: [
+            { label: "Project Inquiries", value: "+210%" },
+            { label: "Page Load Time", value: "0.6s" },
+            { label: "Mobile Score", value: "96/100" },
+            { label: "Global Reach", value: "25+ countries" }
+        ]
+    },
+    'starjean': {
+        title: "Star Jean 819 – Denim Fashion E-commerce",
+        client: "Star Jean 819",
+        link: "https://starjean819.vercel.app/",
+        category: "Web Development",
+
+        overview: "A vibrant e-commerce storefront for a premium denim brand, designed to blend a rich, fashion-forward aesthetic with a fast and intuitive shopping experience across mobile and desktop.",
+
+        problem: "The brand was selling exclusively through third-party marketplaces, missing out on direct-to-consumer revenue and customer data. Their existing online presence lacked a cohesive brand identity and a frictionless checkout flow.",
+
+        strategy: "Built a custom Shopify-inspired storefront using modern web technologies, with a strong focus on visual storytelling. Implemented a mobile-first product gallery, a streamlined cart-to-checkout funnel, and integrated payment processing for a seamless purchase journey.",
+
+        execution: "6-week project. 1. Frontend: React with Tailwind CSS for a responsive, animated product showcase. 2. Backend: Stripe integration for payments and a headless CMS for easy inventory management. 3. Optimization: Image optimization and lazy loading for sub-2s product page loads.",
+
+        results: [
+            { label: "Checkout Conversion", value: "4.8%" },
+            { label: "Mobile Traffic Share", value: "78%" },
+            { label: "Avg. Order Value", value: "$124" },
+            { label: "Cart Abandonment", value: "-42%" }
+        ]
     }
 };
 
@@ -642,7 +753,12 @@ const portfolioItems = [
     { id: 'coffee-social', title: "Artisan Coffee Campaign", category: "social", result: "8x Follower Growth", image: "coffee.png", link: "https://www.instagram.com/contracoffee.pk?igsh=MWNtaTJ6bmdlNzBjYw%3D%3D" },
     { id: 'direct-reel', title: "Viral Reel Campaign", category: "social", result: "Watch Reel", image: "concert.png", link: "https://www.instagram.com/reels/DLYDezio-pN/", directLinkOnly: true },
     { id: 'imperio-scents', title: "Imperio Scents E-commerce", category: "web", result: "0.9s Load Speed", image: "malebk.png", link: "https://www.imperioscents.store/" },
-    { id: 'velirra-luxury', title: "Velirra Luxury Store", category: "web", result: "12x Growth", image: "general.png", link: "https://velirra.store/" }
+    { id: 'velirra-luxury', title: "Velirra Luxury Store", category: "web", result: "12x Growth", image: "general.png", link: "https://velirra.store/" },
+    { id: 'advolva', title: "Advolva Platform", category: "web", result: "9.7% Conversion", image: "adsolva.jpeg"
+, link: "https://adsolva.vercel.app/" },
+    { id: 'aireportly', title: "AirReportly Blog Platform", category: "web", result: "2x Content Throughput", image: "blogs.jpeg", link: "https://www.aireportly.com/" },
+    { id: 'unaiza', title: "Unaiza Portfolio", category: "web", result: "0.6s Load Time", image: "unaiza.jpeg", link: "https://unaiza-portfolio.vercel.app/" },
+    { id: 'starjean', title: "Star Jean 819", category: "web", result: "4.8% Conversion", image: "jeans.jpeg", link: "https://starjean819.vercel.app/" }
 ];
 
 function loadServiceDetail(serviceId) {
@@ -1570,6 +1686,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initRoadAnimation();
     initTestimonials();
     observeSections();
+
+    // Portfolio page initialization (portfolio.html)
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    if (portfolioGrid) {
+        const params = new URLSearchParams(window.location.search);
+        const caseId = params.get('case');
+        if (caseId && caseStudyData[caseId]) {
+            // Start on portfolio so back navigation is correct
+            router.currentPage = 'portfolio';
+            router.navigate('case-study', caseId);
+        } else {
+            router.currentPage = 'portfolio';
+            loadPortfolio();
+        }
+    }
 });
 
 function initTestimonials() {

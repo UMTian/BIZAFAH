@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - BIZAFAH | Digital Innovation Studio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Background Patches -->
+    <div class="bg-patches"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Navigation -->
+    <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-50">
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="window.location.href='index.html'">
+            <div
+                class="w-10 h-10 overflow-hidden rounded-lg shadow-lg group-hover:shadow-[#00b894]/30 transition-shadow">
+                <img src="logo.jpeg" alt="BIZAFAH Logo" class="w-full h-full object-cover">
+            </div>
+            <span
+                class="text-2xl font-black tracking-tighter text-white uppercase group-hover:text-[#00b894] transition-colors">BIZAFAH</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link cursor-pointer" onclick="window.location.href='index.html'">Home</a>
+            <a class="nav-link cursor-pointer" onclick="window.location.href='index.html#services-section'">Services</a>
+            <a class="nav-link cursor-pointer text-[#00b894] border-b-2 border-[#00b894]">Portfolio</a>
+            <a class="nav-link cursor-pointer" onclick="window.location.href='index.html#about-section'">About</a>
+            <button class="btn-primary text-sm py-2 px-6" onclick="scrollToContact()">Book Meeting</button>
+        </div>
+
+        <button class="md:hidden text-2xl" onclick="toggleMobileMenu()">☰</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-black/95 hidden flex-col items-center justify-center gap-8">
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="window.location.href='index.html'; toggleMobileMenu()">Home</a>
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="window.location.href='index.html#services-section'; toggleMobileMenu()">Services</a>
+        <a class="text-2xl hover:text-[#00b894] transition cursor-pointer"
+            onclick="window.location.href='index.html#about-section'; toggleMobileMenu()">About</a>
+    </div>
+
+    <!-- PORTFOLIO PAGE -->
+    <div id="page-portfolio" class="page active">
+        <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-hidden">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">Case <span class="text-[#9b59b6]">Studies</span></h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Real results for real businesses. Explore how we've
+                    helped organizations transform their digital presence.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex justify-center gap-4 mb-12 flex-wrap section-hidden">
+                <button
+                    class="filter-btn active px-6 py-2 rounded-full border border-[#00b894] bg-[#00b894]/10 text-[#00b894] transition"
+                    data-filter="all">All</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="social">Social media</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="web">Web development</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="ai">AI Automation</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border border-white/10 hover:border-[#00b894]/50 transition"
+                    data-filter="analytics">Data Analytics</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                <!-- Portfolio items will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CASE STUDY PAGE -->
+    <div id="page-case-study" class="page">
+        <div class="pt-32 pb-20 px-6 max-w-5xl mx-auto">
+            <button onclick="router.back()"
+                class="mb-8 text-gray-400 hover:text-[#00b894] flex items-center gap-2 transition">
+                ← Back to Portfolio
+            </button>
+
+            <div id="case-study-content" class="section-hidden">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 bg-black/50">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col xl:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="w-8 h-8 overflow-hidden rounded-lg">
+                    <img src="logo.jpeg" alt="BIZAFAH Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xl font-black tracking-tighter text-white uppercase">BIZAFAH</span>
+            </div>
+
+            <div class="text-gray-400 text-sm text-center flex flex-col gap-2">
+                <div class="flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center mb-2">
+                    <a href="tel:+923124234913" class="hover:text-[#00b894] transition flex items-center gap-2">
+                        <i class="fas fa-phone text-[#00b894]"></i>+92 310 0609733
+                    </a>
+                    <a href="tel:+923338010986" class="hover:text-[#9b59b6] transition flex items-center gap-2">
+                        <i class="fas fa-phone text-[#9b59b6]"></i>+92 333 8010986
+                    </a>
+                    <a href="mailto:bizafah@gmail.com"
+                        class="hover:text-[#00b894] transition flex items-center gap-2">
+                        <i class="fas fa-envelope text-[#00b894]"></i>bizafah@gmail.com
+                    </a>
+                </div>
+                <div class="text-gray-500">
+                    © 2026 Bizafah Digital. All rights reserved.
+                </div>
+            </div>
+
+            <div class="flex gap-6 flex-shrink-0">
+                <a href="https://www.instagram.com/bizafah/?hl=en" target="_blank"
+                    class="text-gray-400 hover:text-[#E4405F] transition text-xl"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-[#0A66C2] transition text-xl"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-400 hover:text-[#1877F2] transition text-xl"><i
+                        class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
